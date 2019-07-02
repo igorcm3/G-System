@@ -1,7 +1,11 @@
 package Controllers;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -12,6 +16,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class FXMLTelaPrincipalController {
 
@@ -64,10 +69,13 @@ public class FXMLTelaPrincipalController {
     private Button btnEnviar;
 
     @FXML
-    void btnEnviarClick(ActionEvent event) {
-        if (cb1.isSelected()) {
-           // Tablee.setItems(FXCollections.observableArrayList(new Pessoa(txtNome.getText(), txtSobrenome.getText())));
-        }
+    void btnEnviarClick(ActionEvent event) throws IOException {
+        Stage s1 = new Stage();
+        //Parent root = FXMLLoader.load(getClass().getResource("/FXMLTelaPrincipal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("FXMLLogin.fxml"));
+        Scene scene = new Scene(root);
+        s1.setScene(scene);
+        s1.show(); 
     
     }
 
