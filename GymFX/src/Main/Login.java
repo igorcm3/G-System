@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Views;
+package Main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +16,16 @@ import jfxtras.styles.jmetro8.JMetro;
  *
  * @author coron
  */
-public class GymFX extends Application {
-    
+public class Login extends Application {
+    private static Stage stage;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/FXMLLogin.fxml"));
         new JMetro(JMetro.Style.LIGHT).applyTheme(root);
         Scene scene = new Scene(root);  
         stage.setScene(scene);
+        stage.setTitle("G-SYSTEM LOGIN");
+        stage.resizableProperty().set(false);
         stage.show();
     }
 
@@ -32,6 +34,12 @@ public class GymFX extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }    public static Stage getStage() {
+        return stage;
+    }
+
+    private void setStage(Stage stage) {
+        this.stage = stage;
     }
     
 }
