@@ -5,16 +5,21 @@
  */
 package Main;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import jfxtras.styles.jmetro8.JMetro;
 
 /**
@@ -23,11 +28,12 @@ import jfxtras.styles.jmetro8.JMetro;
  */
 public class Principal extends Application {
     private static Stage stage;
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Views/FXMLTelaPrincipal.fxml"));
         new JMetro(JMetro.Style.LIGHT).applyTheme(root);
-        Scene scene = new Scene(root);  
+        Scene scene = new Scene(root);
         stage.setScene(scene); // colcoa FXML em uma cena
         stage.setTitle("G-SYSTEM ACADEMIA BODY MASTER");
         stage.show(); // abre a janela
@@ -46,8 +52,9 @@ public class Principal extends Application {
     }
 
     private void setStage(Stage stage) {
-        this.stage = stage;
+        Principal.stage = stage;
     }
-    
-    
+
+
+
 }

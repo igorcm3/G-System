@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro8.JMetro;
 
@@ -22,11 +23,14 @@ public class Login extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/Views/FXMLLogin.fxml"));
         new JMetro(JMetro.Style.LIGHT).applyTheme(root);
-        Scene scene = new Scene(root);  
+        Scene scene = new Scene(root); 
+        scene.setFill(Color.AZURE);
         stage.setScene(scene);
         stage.setTitle("G-SYSTEM LOGIN");
         stage.resizableProperty().set(false);
+        
         stage.show();
+        setStage(stage);
     }
 
     /**
@@ -34,12 +38,14 @@ public class Login extends Application {
      */
     public static void main(String[] args) {
         launch(args);
-    }    public static Stage getStage() {
+    }   
+    
+    public static Stage getStage() {
         return stage;
     }
 
     private void setStage(Stage stage) {
-        this.stage = stage;
+        Login.stage = stage;
     }
     
 }
