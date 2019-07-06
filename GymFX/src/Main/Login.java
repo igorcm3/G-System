@@ -24,7 +24,6 @@ public class Login extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/Views/FXMLLogin.fxml"));
         new JMetro(JMetro.Style.LIGHT).applyTheme(root);
         Scene scene = new Scene(root); 
-        scene.setFill(Color.AZURE);
         stage.setScene(scene);
         stage.setTitle("G-SYSTEM LOGIN");
         stage.resizableProperty().set(false);
