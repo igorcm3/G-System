@@ -1,11 +1,14 @@
 package Controllers;
 
+import Main.AlunoCadastro;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
@@ -13,11 +16,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class FXMLTelaPrincipalController implements Initializable {
@@ -38,15 +43,20 @@ public class FXMLTelaPrincipalController implements Initializable {
     @FXML
     private AnchorPane archorpane;
     @FXML
-    private Button btnData;
+    private Button btnAluno;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //     btnData.setOnMouseClicked((MouseEvent e) -> {
-        //AtualizaDataHora();
-        //       lblData.setText("teste");
-        //     });
-        AtualizaDataHora();
+
+        AtualizaDataHora(); // thread do rodapé
+        btnAluno.setOnMouseClicked((MouseEvent e) -> {
+            AlunoCadastro alunoCad = new AlunoCadastro();
+            try {
+                alunoCad.start(new Stage());
+            } catch (Exception ex) {
+                Logger.getLogger(FXMLTelaPrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
     }
 
     public void AtualizaDataHora() {

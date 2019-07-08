@@ -16,12 +16,11 @@ import jfxtras.styles.jmetro8.JMetro;
  *
  * @author coron
  */
-public class Principal extends Application {
-    static Stage stage;
-
+public class AlunoCadastro extends Application {
+    private static Stage stage;
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Views/FXMLTelaPrincipal.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/Views/FXMLAlunoCadastro.fxml"));
         new JMetro(JMetro.Style.LIGHT).applyTheme(root);
         Scene scene = new Scene(root);
         stage.setScene(scene); // colcoa FXML em uma cena
@@ -36,15 +35,13 @@ public class Principal extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
-    public static Stage getStage() {
+    
+        public static Stage getStage() {
         return stage;
     }
 
     private void setStage(Stage stage) {
         Principal.stage = stage;
     }
-
-
-
+    
 }
