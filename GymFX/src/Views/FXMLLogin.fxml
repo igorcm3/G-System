@@ -10,20 +10,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="apLogin" cacheShape="false" centerShape="false" prefHeight="331.0" prefWidth="571.0" scaleShape="false" style="-fx-background-color: WhiteSmoke;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLoginController">
+<AnchorPane id="AnchorPane" fx:id="apLogin" cacheShape="false" centerShape="false" prefHeight="331.0" prefWidth="571.0" scaleShape="false" style="-fx-background-color: #F8F8FF;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLoginController">
     <children>
-        <Button fx:id="btnEntrar" layoutX="92.0" layoutY="273.0" text="Entrar" />
-      <TextField fx:id="txtLogin" layoutX="90.0" layoutY="161.0" prefHeight="25.0" prefWidth="149.0" />
-      <PasswordField fx:id="txtSenha" layoutX="90.0" layoutY="227.0" />
-      <Label fx:id="lbLogin" layoutX="92.0" layoutY="136.0" prefHeight="17.0" prefWidth="149.0" text="Login" />
-      <Label fx:id="lbSenha" layoutX="92.0" layoutY="199.0" prefHeight="17.0" prefWidth="149.0" text="Senha" />
-      <Button fx:id="btnSair" layoutX="189.0" layoutY="273.0" mnemonicParsing="false" text="Sair" />
-      <ImageView id="imgv" fx:id="imgv" fitHeight="152.0" fitWidth="163.0" layoutX="314.0" layoutY="132.0" smooth="false">
+        <Button fx:id="btnEntrar" layoutX="74.0" layoutY="273.0" text="Entrar" />
+      <TextField fx:id="txtLogin" layoutX="72.0" layoutY="161.0" prefHeight="25.0" prefWidth="149.0" />
+      <PasswordField fx:id="txtSenha" layoutX="72.0" layoutY="227.0" />
+      <Label fx:id="lbLogin" layoutX="74.0" layoutY="136.0" prefHeight="17.0" prefWidth="149.0" text="Login" />
+      <Label fx:id="lbSenha" layoutX="74.0" layoutY="199.0" prefHeight="17.0" prefWidth="149.0" text="Senha" />
+      <Button fx:id="btnSair" layoutX="171.0" layoutY="273.0" mnemonicParsing="false" text="Sair" />
+      <ImageView id="imgv" fx:id="imgv" fitHeight="152.0" fitWidth="163.0" layoutX="309.0" layoutY="131.0" smooth="false">
          <image>
-            <Image url="@../../../../../../Downloads/weightlifting.png" />
+            <Image url="@weightlifting.png" />
          </image>
       </ImageView>
-      <Label id="lbAcademia" fx:id="lbAcademia" layoutX="90.0" layoutY="46.0" prefHeight="53.0" prefWidth="394.0" text="Academia Body Master" textFill="#322f2f" textOverrun="CENTER_WORD_ELLIPSIS">
+      <Label id="lbAcademia" fx:id="lbAcademia" layoutX="72.0" layoutY="42.0" prefHeight="53.0" prefWidth="394.0" text="Academia Body Master" textFill="#322f2f" textOverrun="CENTER_WORD_ELLIPSIS">
          <font>
             <Font name="Arial Bold" size="33.0" />
          </font>

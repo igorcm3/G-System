@@ -44,6 +44,7 @@ public class FXMLoginController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        txtLogin.setFocusTraversable(true);
         btnEntrar.setOnMouseClicked((MouseEvent e) -> {
             logar();
         });

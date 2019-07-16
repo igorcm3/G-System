@@ -2,14 +2,16 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DialogPane?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="408.0" prefWidth="641.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="Controllers.FXMLAlunoCadastroController">
+<AnchorPane id="AnchorPane" prefHeight="408.0" prefWidth="641.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.FXMLAlunoCadastroController">
    <children>
-      <ProgressIndicator fx:id="piAlunoCad" layoutX="529.0" layoutY="329.0" progress="0.0" />
+      <ProgressIndicator fx:id="piAlunoCad" layoutX="552.0" layoutY="364.0" prefHeight="25.0" prefWidth="48.0" progress="0.0" />
       <TextField layoutX="111.0" layoutY="71.0" />
       <TextField layoutX="111.0" layoutY="112.0" />
       <TextField layoutX="111.0" layoutY="148.0" />
@@ -19,5 +21,8 @@
       <ComboBox layoutX="111.0" layoutY="304.0" prefWidth="150.0" />
       <Button fx:id="btnSalvar" defaultButton="true" layoutX="111.0" layoutY="349.0" mnemonicParsing="false" text="Salvar" />
       <Button fx:id="btnCancelar" layoutX="208.0" layoutY="351.0" mnemonicParsing="false" text="Cancelar" />
+      <Separator layoutX="343.0" orientation="VERTICAL" prefHeight="408.0" prefWidth="2.0" />
+      <DialogPane fx:id="dialogResumo" contentText="Aluno Exemplo" headerText="Resumo do cadastro" layoutX="347.0" layoutY="57.0" prefHeight="301.0" prefWidth="288.0" style="-fx-background-color: blue;" />
+      <Label layoutX="349.0" layoutY="368.0" prefHeight="17.0" prefWidth="185.0" text="Porcentagem do casdastro:" />
    </children>
 </AnchorPane>

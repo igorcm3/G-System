@@ -32,6 +32,8 @@ public class FXMLTelaPrincipalController implements Initializable {
     @FXML
     private Label lblData;
     @FXML
+    private Label lblUsuario;
+    @FXML
     private Label lblHora;
     @FXML
     private Label lblVersaoSistema;
