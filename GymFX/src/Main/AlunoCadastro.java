@@ -24,7 +24,7 @@ public class AlunoCadastro extends Application {
         new JMetro(JMetro.Style.LIGHT).applyTheme(root);
         Scene scene = new Scene(root);
         stage.setScene(scene); // colcoa FXML em uma cena
-        stage.setTitle("G-SYSTEM ACADEMIA BODY MASTER");
+        stage.setTitle("Cadastro de alunos");
         stage.show(); // abre a janela
         setStage(stage);  // guarda o stage no atributo da classe
     }
