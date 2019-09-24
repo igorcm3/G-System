@@ -45,9 +45,11 @@ public class frmLogin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GS Login");
+        setUndecorated(true);
         setResizable(false);
 
         pnLogin.setBackground(new java.awt.Color(255, 255, 255));
+        pnLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 153), 1, true));
 
         btnEntrar.setBackground(new java.awt.Color(51, 51, 255));
         btnEntrar.setText("Entrar");
