@@ -3,12 +3,12 @@
   <persistence-unit name="GymSwingPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>Models.Aluno</class>
-    <class>Models.Empresa</class>
-    <class>Models.Enderecos</class>
     <class>Models.Medidas</class>
     <class>Models.Mensalidade</class>
     <class>Models.Personal</class>
     <class>Models.Treino</class>
+    <class>Models.Empresa</class>
+    <class>Models.Endereco</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gym?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

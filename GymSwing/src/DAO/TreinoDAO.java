@@ -5,7 +5,7 @@
  */
 package DAO;
 
-import Models.Medidas;
+import Models.Treino;
 import Persistencia.HibernateUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -14,7 +14,7 @@ import javax.persistence.EntityManager;
  *
  * @author coron
  */
-public class MedidasDAO {
+public class TreinoDAO {
 
     private EntityManager em = new HibernateUtil().getEntityManager();
 
@@ -22,32 +22,35 @@ public class MedidasDAO {
         return em;
     }
 
-    public void persist(Medidas med) {
+    public void persist(Treino p) {
         em.getTransaction().begin();
-        em.persist(med);
+        em.persist(p);
         em.getTransaction().commit();
     }
 
-    public void merge(Medidas med) {
+    public void merge(Treino p) {
 
         em.getTransaction().begin();
-        em.merge(med);
+        em.merge(p);
         em.getTransaction().commit();
     }
 
-    public void remove(Medidas med) {
+    public void remove(Treino p) {
         em.getTransaction().begin();
-        em.remove(med);
+        em.remove(p);
         em.getTransaction().commit();
     }
-    // Listar Medidas
-    public List<Medidas> listarMedidas() {
-        List<Medidas> lista = null;
-        lista = em.createQuery("from Medidas u ").getResultList();
+
+    // Listar empresas
+    public List<Treino> listarTreinos() {
+        List<Treino> lista = null;
+        lista = em.createQuery("from Treino u ").getResultList();
         return lista;
     }
-    public Medidas getMedidasPorId(int id) {
-        Medidas emp = (Medidas) em.createQuery("from Medidas u where idMedidas = " + String.valueOf(id) + "").getSingleResult();
+
+    public Treino getPersonalPorId(int id) {
+
+        Treino emp = (Treino) em.createQuery("from Treino u where idTreino = " + String.valueOf(id) + "").getSingleResult();
         return emp;
     }
 

@@ -30,10 +30,14 @@ public class frmPrincipal extends javax.swing.JFrame {
         AtualizaDataHora();
         EmpresaDAO empDao = new EmpresaDAO();
         Empresa emp = empDao.getEmpresaPorId(1);
-        lblVersaoSistema.setText(emp.getFantasia());
-        
+        if (emp.equals(null)) {
+            lblVersaoSistema.setText("Empresa não cadastrada");
+        } else {
+            lblVersaoSistema.setText(emp.getFantasia()); // para testes, ajsutar depois}
 
+        }
     }
+    
 
     public void AtualizaDataHora() {
         Thread th = new Thread(new Runnable() { //cria uma thread
@@ -53,6 +57,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         });
         th.start();
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -163,7 +168,7 @@ public class frmPrincipal extends javax.swing.JFrame {
 
     private void btnAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlunosActionPerformed
         // TODO add your handling code here:
-        frmListarAlunos  listarAlunos = new frmListarAlunos(true);
+        frmListarAlunos listarAlunos = new frmListarAlunos(true);
         listarAlunos.setVisible(true);
     }//GEN-LAST:event_btnAlunosActionPerformed
 

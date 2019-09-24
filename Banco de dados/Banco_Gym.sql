@@ -10,7 +10,7 @@
 
 -- CRIAÇÃO DAS TABELAS
 create database Gym;
-use  Gym;
+use Gym;		
 -- drop database gym;
 create table Empresa (
 	idEmpresa int not null auto_increment,
@@ -21,9 +21,8 @@ create table Empresa (
     primary key (idEmpresa)
 );
 
-create table Enderecos (
+create table Endereco (
 	idEndereco int not null auto_increment,
-    codigo varchar(6),
 	endereco varchar(200),
     numero varchar(10),
     complemento varchar (150),
@@ -39,6 +38,7 @@ create table Personal (
     codigo varchar(6),
 	nome varchar(50),
     rgcpf varchar(11),
+    cref varchar(9),
     descricao varchar(500),
     primary key (idPersonal)
 );
@@ -52,19 +52,6 @@ create table Treino (
     quantidadeSemana int,
     primary key (idTreino)
 );
-
-create table Mensalidade (
-	idMensalidade int not null auto_increment,
-    pago boolean,
-    codigo varchar(6),
-    valor float,
-    dataPagamento date,
-    id_treino int,
-    primary key (idMensalidade),
-    foreign key  (id_Treino) references Treino (idTreino)
-); 
-
-
 
 create table Medidas (
 	idMedidas int not null auto_increment,
@@ -81,6 +68,17 @@ create table Medidas (
     primary key (idMedidas)
 );
 
+create table Mensalidade (
+	idMensalidade int not null auto_increment,
+    pago boolean,
+    codigo varchar(6),
+    valor float,
+    dataPagamento date,
+    id_treino int,
+    primary key (idMensalidade),
+    foreign key  (id_Treino) references Treino (idTreino)
+); 
+
 create table Aluno (
 	idAluno int not null auto_increment,
     codigo varchar (6),
@@ -88,26 +86,30 @@ create table Aluno (
     celular varchar (11),
     sexo char (1),
     rgcpf varchar (11),
-    idEndereco int not null,
+    idEndereco int,
     idPersonal int,
     idMedidas int,
     idMensalidade int not null,
     primary key (idAluno),
-    foreign key (idEndereco) references Enderecos (idEndereco),
+    foreign key (idEndereco) references Endereco (idEndereco),
     foreign key (idPersonal) references Personal (idPersonal),
     foreign key (idMensalidade) references Mensalidade (idMensalidade),
     foreign key (idMedidas) references Medidas (idMedidas)
 );
 
 
-insert into Enderecos values (0,'0001', 'Rua Oscar Von Hohenbruch', '281', 'Apartamento 101', 'Prédio de esqquina com as creches', '89650000', 'Treze Tílias', 'SC');
+insert into Endereco values (0, 'Rua Oscar Von Hohenbruch', '281', 'Apartamento 101', 'Prédio de esqquina com as creches', '89650000', 'Treze Tílias', 'SC');
 insert into Mensalidade values (0, False, '0001', 70.00, curdate(),null);
 
 insert into Aluno values (0, '0001', 'Gabriela Rhoden', '9999999', 'F', '05805805805', 1, null, null, 1);
 
--- select * from Enderecos;
+
+select * from Empresa;
+select * from Endereco;
 -- select * from Mensalidade;
--- select * from Medidas;
+-- -- select * from Medidas;
+
+select * from Aluno;
 
 
 select a.nome, m.valor, m.pago from Aluno a left join Mensalidade m on (m.idMensalidade = a.idMensalidade);

@@ -26,20 +26,19 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author blank
  */
 @Entity
-@Table(name = "Enderecos")
+@Table(name = "Endereco")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Enderecos.findAll", query = "SELECT e FROM Enderecos e")
-    , @NamedQuery(name = "Enderecos.findByIdEndereco", query = "SELECT e FROM Enderecos e WHERE e.idEndereco = :idEndereco")
-    , @NamedQuery(name = "Enderecos.findByCodigo", query = "SELECT e FROM Enderecos e WHERE e.codigo = :codigo")
-    , @NamedQuery(name = "Enderecos.findByEndereco", query = "SELECT e FROM Enderecos e WHERE e.endereco = :endereco")
-    , @NamedQuery(name = "Enderecos.findByNumero", query = "SELECT e FROM Enderecos e WHERE e.numero = :numero")
-    , @NamedQuery(name = "Enderecos.findByComplemento", query = "SELECT e FROM Enderecos e WHERE e.complemento = :complemento")
-    , @NamedQuery(name = "Enderecos.findByReferencia", query = "SELECT e FROM Enderecos e WHERE e.referencia = :referencia")
-    , @NamedQuery(name = "Enderecos.findByCep", query = "SELECT e FROM Enderecos e WHERE e.cep = :cep")
-    , @NamedQuery(name = "Enderecos.findByCidade", query = "SELECT e FROM Enderecos e WHERE e.cidade = :cidade")
-    , @NamedQuery(name = "Enderecos.findByUf", query = "SELECT e FROM Enderecos e WHERE e.uf = :uf")})
-public class Enderecos implements Serializable {
+    @NamedQuery(name = "Endereco.findAll", query = "SELECT e FROM Endereco e")
+    , @NamedQuery(name = "Endereco.findByIdEndereco", query = "SELECT e FROM Endereco e WHERE e.idEndereco = :idEndereco")
+    , @NamedQuery(name = "Endereco.findByEndereco", query = "SELECT e FROM Endereco e WHERE e.endereco = :endereco")
+    , @NamedQuery(name = "Endereco.findByNumero", query = "SELECT e FROM Endereco e WHERE e.numero = :numero")
+    , @NamedQuery(name = "Endereco.findByComplemento", query = "SELECT e FROM Endereco e WHERE e.complemento = :complemento")
+    , @NamedQuery(name = "Endereco.findByReferencia", query = "SELECT e FROM Endereco e WHERE e.referencia = :referencia")
+    , @NamedQuery(name = "Endereco.findByCep", query = "SELECT e FROM Endereco e WHERE e.cep = :cep")
+    , @NamedQuery(name = "Endereco.findByCidade", query = "SELECT e FROM Endereco e WHERE e.cidade = :cidade")
+    , @NamedQuery(name = "Endereco.findByUf", query = "SELECT e FROM Endereco e WHERE e.uf = :uf")})
+public class Endereco implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEndereco")
     private Collection<Aluno> alunoCollection;
@@ -50,8 +49,6 @@ public class Enderecos implements Serializable {
     @Basic(optional = false)
     @Column(name = "idEndereco")
     private Integer idEndereco;
-    @Column(name = "codigo")
-    private String codigo;
     @Column(name = "endereco")
     private String endereco;
     @Column(name = "numero")
@@ -67,10 +64,10 @@ public class Enderecos implements Serializable {
     @Column(name = "uf")
     private String uf;
 
-    public Enderecos() {
+    public Endereco() {
     }
 
-    public Enderecos(Integer idEndereco) {
+    public Endereco(Integer idEndereco) {
         this.idEndereco = idEndereco;
     }
 
@@ -80,14 +77,6 @@ public class Enderecos implements Serializable {
 
     public void setIdEndereco(Integer idEndereco) {
         this.idEndereco = idEndereco;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getEndereco() {
@@ -156,10 +145,10 @@ public class Enderecos implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Enderecos)) {
+        if (!(object instanceof Endereco)) {
             return false;
         }
-        Enderecos other = (Enderecos) object;
+        Endereco other = (Endereco) object;
         if ((this.idEndereco == null && other.idEndereco != null) || (this.idEndereco != null && !this.idEndereco.equals(other.idEndereco))) {
             return false;
         }
@@ -168,7 +157,7 @@ public class Enderecos implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Enderecos[ idEndereco=" + idEndereco + " ]";
+        return "Models.Endereco[ idEndereco=" + idEndereco + " ]";
     }
 
     @XmlTransient

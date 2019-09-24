@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Personal.findByCodigo", query = "SELECT p FROM Personal p WHERE p.codigo = :codigo")
     , @NamedQuery(name = "Personal.findByNome", query = "SELECT p FROM Personal p WHERE p.nome = :nome")
     , @NamedQuery(name = "Personal.findByRgcpf", query = "SELECT p FROM Personal p WHERE p.rgcpf = :rgcpf")
+    , @NamedQuery(name = "Personal.findByCREF", query = "SELECT p FROM Personal p WHERE p.cref = :cref")
     , @NamedQuery(name = "Personal.findByDescricao", query = "SELECT p FROM Personal p WHERE p.descricao = :descricao")})
 public class Personal implements Serializable {
 
@@ -51,6 +52,8 @@ public class Personal implements Serializable {
     private String nome;
     @Column(name = "rgcpf")
     private String rgcpf;
+    @Column(name = "cref")
+    private String cref;    
     @Column(name = "descricao")
     private String descricao;
 
@@ -93,6 +96,14 @@ public class Personal implements Serializable {
         this.rgcpf = rgcpf;
     }
 
+    public String getCref() {
+        return cref;
+    }
+
+    public void setCref(String cref) {
+        this.cref = cref;
+    }    
+
     public String getDescricao() {
         return descricao;
     }
@@ -123,7 +134,7 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Personal[ idPersonal=" + idPersonal + " ]";
+        return nome;
     }
 
     @XmlTransient

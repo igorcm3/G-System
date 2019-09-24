@@ -163,7 +163,7 @@ public class frmListarAlunos extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        frmAluno aluno = new frmAluno(true);
+        frmAluno aluno = new frmAluno(true, true);
         aluno.setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed

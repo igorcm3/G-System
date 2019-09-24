@@ -54,7 +54,7 @@ public class Aluno implements Serializable {
     private String rgcpf;
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
     @ManyToOne(optional = false)
-    private Enderecos idEndereco;
+    private Endereco idEndereco;
     @JoinColumn(name = "idPersonal", referencedColumnName = "idPersonal")
     @ManyToOne
     private Personal idPersonal;
@@ -120,11 +120,11 @@ public class Aluno implements Serializable {
         this.rgcpf = rgcpf;
     }
 
-    public Enderecos getIdEndereco() {
+    public Endereco getIdEndereco() {
         return idEndereco;
     }
 
-    public void setIdEndereco(Enderecos idEndereco) {
+    public void setIdEndereco(Endereco idEndereco) {
         this.idEndereco = idEndereco;
     }
 

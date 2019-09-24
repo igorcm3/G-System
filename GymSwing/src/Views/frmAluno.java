@@ -5,19 +5,35 @@
  */
 package Views;
 
+import DAO.PersonalDAO;
+import Models.Aluno;
+import Models.Personal;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+
 /**
  *
  * @author coron
  */
 public class frmAluno extends javax.swing.JDialog {
 
+    protected Aluno aluno;
+    protected Personal personal;
+
     /**
      * Creates new form frmAluno
      */
-    public frmAluno(boolean modal) {
+    public frmAluno(boolean modal, boolean novoAluno) {
         setModal(modal);
         initComponents();
         setLocationRelativeTo(null);
+        aluno = new Aluno();
+        personal = new Personal();
+        rbMasc.setSelected(true);
+        // PreencherCamposAluno(novoAluno);
+
+        carregarPersonais();
+
     }
 
     /**
@@ -38,19 +54,20 @@ public class frmAluno extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         txt1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbMasc = new javax.swing.JRadioButton();
+        rbFem = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
         txt2 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         txt4 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        btnEndereco = new javax.swing.JButton();
+        lblEndereco = new javax.swing.JLabel();
+        lblNumero = new javax.swing.JLabel();
+        lblCidade = new javax.swing.JLabel();
+        lblEstado = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbPersonais = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -81,9 +98,19 @@ public class frmAluno extends javax.swing.JDialog {
 
         jLabel4.setText("Sexo");
 
-        jRadioButton1.setText("Masculino");
+        rbMasc.setText("Masculino");
+        rbMasc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbMascActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText("Femenino");
+        rbFem.setText("Femenino");
+        rbFem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbFemActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Celular");
 
@@ -106,9 +133,9 @@ public class frmAluno extends javax.swing.JDialog {
                             .addComponent(jLabel4))
                         .addGap(24, 24, 24)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton1)
+                            .addComponent(rbMasc)
                             .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jRadioButton2)))
+                            .addComponent(rbFem)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -132,10 +159,10 @@ public class frmAluno extends javax.swing.JDialog {
                     .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jRadioButton1)
+                    .addComponent(rbMasc)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(rbFem)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -149,13 +176,20 @@ public class frmAluno extends javax.swing.JDialog {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Endereços", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 255))); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        btnEndereco.setText("Adicionar endereço");
+        btnEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnderecoActionPerformed(evt);
+            }
+        });
 
-        jLabel7.setText("A descrição do endereço vem aqui");
+        lblEndereco.setText("Endereço: ");
 
-        jButton3.setText("+");
+        lblNumero.setText("Nº: ");
 
-        jLabel8.setText("Novo endereço");
+        lblCidade.setText("Cidade: ");
+
+        lblEstado.setText("SC: ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -164,36 +198,37 @@ public class frmAluno extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 5, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addGap(8, 8, 8)))
+                    .addComponent(btnEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                    .addComponent(lblEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(lblEndereco)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblNumero)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblCidade)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEstado)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jButton3))
+                .addComponent(btnEndereco)
                 .addContainerGap())
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Personal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 255))); // NOI18N
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jButton5.setText("+");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jLabel12.setText("Novo personal");
 
@@ -204,7 +239,7 @@ public class frmAluno extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbPersonais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -215,12 +250,12 @@ public class frmAluno extends javax.swing.JDialog {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbPersonais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jButton5))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Medidas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 255))); // NOI18N
@@ -262,7 +297,7 @@ public class frmAluno extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Mensalidade\\Treino", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 255))); // NOI18N
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Treino e mensalidade", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 255))); // NOI18N
 
         jLabel16.setText("Status: Pago/n pago");
 
@@ -355,24 +390,77 @@ public class frmAluno extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnderecoActionPerformed
+        // TODO add your handling code here:
+        frmCadastrarEndereco frmEndereco = new frmCadastrarEndereco(true, this);
+        frmEndereco.setVisible(true);
+    }//GEN-LAST:event_btnEnderecoActionPerformed
+
+    private void rbMascActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbMascActionPerformed
+        // TODO add your handling code here:
+        if (rbMasc.isSelected()) {
+            rbFem.setSelected(false);
+
+        } else {
+            rbMasc.setSelected(true);
+        }
+    }//GEN-LAST:event_rbMascActionPerformed
+
+    private void rbFemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFemActionPerformed
+        // TODO add your handling code here:
+        if (rbFem.isSelected()) {
+            rbMasc.setSelected(false);
+        } else {
+            rbFem.setSelected(true);
+        }
+    }//GEN-LAST:event_rbFemActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        frmCadastrarPersonal frmPersonais = new frmCadastrarPersonal(true, this); 
+        frmPersonais.setVisible(true);
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    public void PreencherCamposAluno(boolean novoAluno) {
+        if (novoAluno = false) {
+            //aluno.get
+        }
+
+    }
+
+    public void atualizarEnderecoAluno() {
+        // na tela de endereços, passa o endereço para o objeto gloal de aluno dessa tela
+        // essa função apenas preenche os componentes com o endereço.
+        lblEndereco.setText("End: " + aluno.getIdEndereco().getEndereco());
+        lblNumero.setText("Nº: " + aluno.getIdEndereco().getNumero());
+        lblCidade.setText("Cidade: " + aluno.getIdEndereco().getCidade());
+        lblEstado.setText("Estado: " + aluno.getIdEndereco().getUf());
+        btnEndereco.setText("Alterar endereço");
+    }
+
+    public void carregarPersonais() {
+
+        PersonalDAO pDAO = new PersonalDAO();
+        List<Personal> p = pDAO.listarPersonals();
+        DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel();
+        for (Personal ps : p) {
+            defaultComboBox.addElement(ps);
+        }
+        cbPersonais.setModel(defaultComboBox);
+
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEndereco;
+    private javax.swing.JComboBox<String> cbPersonais;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -381,23 +469,23 @@ public class frmAluno extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCidade;
+    private javax.swing.JLabel lblEndereco;
+    private javax.swing.JLabel lblEstado;
+    private javax.swing.JLabel lblNumero;
+    private javax.swing.JRadioButton rbFem;
+    private javax.swing.JRadioButton rbMasc;
     private javax.swing.JTextField txt1;
     private javax.swing.JTextField txt2;
     private javax.swing.JTextField txt4;
     // End of variables declaration//GEN-END:variables
+
 }
