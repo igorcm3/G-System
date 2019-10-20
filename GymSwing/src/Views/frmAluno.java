@@ -330,6 +330,11 @@ public class frmAluno extends javax.swing.JDialog {
         jLabel11.setText("descrição resumida mensalidade");
 
         jButton8.setText("Add/Alterar mensalidade");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jLabel15.setText("descrição resumida treino");
 
@@ -460,6 +465,12 @@ public class frmAluno extends javax.swing.JDialog {
         // TODO add your handling code here:
         Funcoes.permitirSomenteNumeros(evt);
     }//GEN-LAST:event_txt4KeyTyped
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        frmTreinoMensalidade frmMensalidade = new frmTreinoMensalidade(true,this);
+        frmMensalidade.setVisible(true);
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     public void PreencherCamposAluno(boolean novoAluno) {
         if (novoAluno = false) {

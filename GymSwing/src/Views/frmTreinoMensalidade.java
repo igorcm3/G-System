@@ -1,13 +1,25 @@
-
 package Views;
-
 
 public class frmTreinoMensalidade extends javax.swing.JDialog {
 
+    protected frmAluno frameAluno;
 
-    public frmTreinoMensalidade(boolean modal) {
+    public frmTreinoMensalidade(boolean modal, frmAluno framAluno) {
         this.setModal(modal);
         initComponents();
+        setLocationRelativeTo(null);
+        this.frameAluno = framAluno;
+        carregarTreinoMensalidade();
+    }
+
+    private void carregarTreinoMensalidade() {
+        // if aluno existe, carrega mensalidade para edi;áo, else desablida, aguarda configurar treino
+        habilitaMensalidade(false);
+    }
+
+    private void habilitaMensalidade(boolean hab) {
+        txtValor.setEnabled(hab);
+        cbStatus.setEnabled(hab);
     }
 
     @SuppressWarnings("unchecked")
@@ -25,12 +37,13 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         jComboBox2 = new javax.swing.JComboBox<>();
         jButton4 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
+        painelResumoTreino = new javax.swing.JPanel();
         painelMensalidade = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbStatus = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         lblTreino = new javax.swing.JLabel();
@@ -39,7 +52,6 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Treino e mensalidade");
-        getContentPane().setLayout(null);
 
         painelFundo.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -54,8 +66,11 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         painelPossuiPersonal.setBackground(new java.awt.Color(255, 255, 255));
         painelPossuiPersonal.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true), "Utiliza personal?", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11))); // NOI18N
 
+        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jRadioButton1.setSelected(true);
         jRadioButton1.setText("Não");
 
+        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
         jRadioButton2.setText("Sim");
 
         javax.swing.GroupLayout painelPossuiPersonalLayout = new javax.swing.GroupLayout(painelPossuiPersonal);
@@ -119,6 +134,20 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        painelResumoTreino.setBackground(new java.awt.Color(252, 248, 248));
+        painelResumoTreino.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true), "Resumo do treino", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11))); // NOI18N
+
+        javax.swing.GroupLayout painelResumoTreinoLayout = new javax.swing.GroupLayout(painelResumoTreino);
+        painelResumoTreino.setLayout(painelResumoTreinoLayout);
+        painelResumoTreinoLayout.setHorizontalGroup(
+            painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        painelResumoTreinoLayout.setVerticalGroup(
+            painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout painelTreinoLayout = new javax.swing.GroupLayout(painelTreino);
         painelTreino.setLayout(painelTreinoLayout);
         painelTreinoLayout.setHorizontalGroup(
@@ -129,6 +158,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
                     .addGroup(painelTreinoLayout.createSequentialGroup()
                         .addGroup(painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(painelResumoTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(painelTreinoLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,7 +175,9 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addGroup(painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(painelPossuiPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(painelTreinos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(painelResumoTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGap(20, 20, 20)
                 .addComponent(jButton3)
@@ -155,9 +187,9 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         painelMensalidade.setBackground(new java.awt.Color(255, 255, 255));
         painelMensalidade.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true));
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtValorActionPerformed(evt);
             }
         });
 
@@ -167,7 +199,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
         jLabel3.setText("Data pagamento");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago", "Não pago" }));
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago", "Não pago" }));
 
         javax.swing.GroupLayout painelMensalidadeLayout = new javax.swing.GroupLayout(painelMensalidade);
         painelMensalidade.setLayout(painelMensalidadeLayout);
@@ -179,11 +211,11 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                     .addGroup(painelMensalidadeLayout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(painelMensalidadeLayout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel3))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
@@ -192,20 +224,25 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
             .addGroup(painelMensalidadeLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addGroup(painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jButton1.setText("Salvar");
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         lblTreino.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblTreino.setForeground(new java.awt.Color(1, 12, 119));
@@ -264,27 +301,40 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addGap(22, 22, 22))
         );
 
-        getContentPane().add(painelFundo);
-        painelFundo.setBounds(0, 0, 790, 470);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(painelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(painelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtValorActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -293,14 +343,15 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lblTreino;
     private javax.swing.JLabel lblTreino1;
     private javax.swing.JPanel painelFundo;
     private javax.swing.JPanel painelMensalidade;
     private javax.swing.JPanel painelPossuiPersonal;
+    private javax.swing.JPanel painelResumoTreino;
     private javax.swing.JPanel painelTreino;
     private javax.swing.JPanel painelTreinos;
     private javax.swing.JSeparator sep;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }
