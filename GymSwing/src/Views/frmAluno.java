@@ -7,7 +7,12 @@ package Views;
 
 import DAO.PersonalDAO;
 import Models.Aluno;
+import Models.Endereco;
+import Models.Medidas;
+import Models.Mensalidade;
 import Models.Personal;
+import Models.Treino;
+import Uteis.Funcoes;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 
@@ -18,7 +23,11 @@ import javax.swing.DefaultComboBoxModel;
 public class frmAluno extends javax.swing.JDialog {
 
     protected Aluno aluno;
+    protected Endereco endereco;
+    protected Medidas medidas;
     protected Personal personal;
+    protected Treino treino;
+    protected Mensalidade mensalidade;
 
     /**
      * Creates new form frmAluno
@@ -87,6 +96,11 @@ public class frmAluno extends javax.swing.JDialog {
         jButton1.setText("Salvar");
 
         jButton2.setText("Sair");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Aluno", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(0, 51, 255))); // NOI18N
 
@@ -114,7 +128,19 @@ public class frmAluno extends javax.swing.JDialog {
 
         jLabel3.setText("Celular");
 
+        txt2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt2KeyTyped(evt);
+            }
+        });
+
         jLabel5.setText("CPF");
+
+        txt4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txt4KeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -417,9 +443,23 @@ public class frmAluno extends javax.swing.JDialog {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        frmCadastrarPersonal frmPersonais = new frmCadastrarPersonal(true, this); 
+        frmCadastrarPersonal frmPersonais = new frmCadastrarPersonal(true, this);
         frmPersonais.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt2KeyTyped
+        Funcoes.permitirSomenteNumeros(evt);
+    }//GEN-LAST:event_txt2KeyTyped
+
+    private void txt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt4KeyTyped
+        // TODO add your handling code here:
+        Funcoes.permitirSomenteNumeros(evt);
+    }//GEN-LAST:event_txt4KeyTyped
 
     public void PreencherCamposAluno(boolean novoAluno) {
         if (novoAluno = false) {
@@ -428,7 +468,7 @@ public class frmAluno extends javax.swing.JDialog {
 
     }
 
-    public void atualizarEnderecoAluno() {
+    public boolean atualizarEnderecoAluno() {
         // na tela de endereços, passa o endereço para o objeto gloal de aluno dessa tela
         // essa função apenas preenche os componentes com o endereço.
         lblEndereco.setText("End: " + aluno.getIdEndereco().getEndereco());
@@ -436,6 +476,12 @@ public class frmAluno extends javax.swing.JDialog {
         lblCidade.setText("Cidade: " + aluno.getIdEndereco().getCidade());
         lblEstado.setText("Estado: " + aluno.getIdEndereco().getUf());
         btnEndereco.setText("Alterar endereço");
+        if (aluno.equals(null)) {
+            return false;
+        } else {
+            return true;
+        }
+
     }
 
     public void carregarPersonais() {
@@ -488,4 +534,51 @@ public class frmAluno extends javax.swing.JDialog {
     private javax.swing.JTextField txt4;
     // End of variables declaration//GEN-END:variables
 
+    public Aluno getAluno() {
+        return aluno;
+    }
+
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
+    }
+
+    public Medidas getMedidas() {
+        return medidas;
+    }
+
+    public void setMedidas(Medidas medidas) {
+        this.medidas = medidas;
+    }
+
+    public Personal getPersonal() {
+        return personal;
+    }
+
+    public void setPersonal(Personal personal) {
+        this.personal = personal;
+    }
+
+    public Treino getTreino() {
+        return treino;
+    }
+
+    public void setTreino(Treino treino) {
+        this.treino = treino;
+    }
+
+    public Mensalidade getMensalidade() {
+        return mensalidade;
+    }
+
+    public void setMensalidade(Mensalidade mensalidade) {
+        this.mensalidade = mensalidade;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }

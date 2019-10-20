@@ -14,13 +14,14 @@ import javax.swing.JOptionPane;
  * @author coron
  */
 public class frmCadastrarPersonal extends javax.swing.JDialog {
-    
+    protected frmAluno frameAluno;
     
     public frmCadastrarPersonal(boolean modal, frmAluno framAluno) {
         // IMPLEMENTAR CREF VARCHAR(9) NO MODELO 000000-G/SC
         setModal(modal);
         initComponents();
         setLocationRelativeTo(null);
+        this.frameAluno = framAluno;
     }
 
     @SuppressWarnings("unchecked")
@@ -147,6 +148,7 @@ public class frmCadastrarPersonal extends javax.swing.JDialog {
         p.setDescricao(txtDescricao.getText());
         
         pDAO.merge(p);
+        frameAluno.carregarPersonais();
         JOptionPane.showMessageDialog(null, "Personal salvo com sucesso!", "Personal trainner", 1);
 
     }//GEN-LAST:event_btnSalvarActionPerformed

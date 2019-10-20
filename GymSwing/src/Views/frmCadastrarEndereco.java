@@ -9,6 +9,7 @@ import DAO.EnderecoDAO;
 import Models.Aluno;
 import Models.Endereco;
 import javax.swing.JOptionPane;
+import Uteis.Funcoes;
 
 /**
  *
@@ -50,6 +51,18 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de endereço");
+
+        txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNumeroKeyTyped(evt);
+            }
+        });
+
+        txtCEP.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCEPKeyTyped(evt);
+            }
+        });
 
         jLabel1.setText("Endereço:");
 
@@ -200,10 +213,26 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
         
         edDAO.merge(ed);
         //seta o endereço para a tela de aluno
-        frameAluno.aluno.setIdEndereco(ed);
-        frameAluno.atualizarEnderecoAluno();
-        JOptionPane.showMessageDialog(null, "Endereço salvo com sucesso!", "Endereço", 1);
+        frameAluno.setEndereco(ed);
+        boolean result = frameAluno.atualizarEnderecoAluno();
+        if (result) {
+            JOptionPane.showMessageDialog(null, "Endereço salvo com sucesso!", "Endereço", 1);    
+        }else{
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar endereço!", "Endereço", 1);    
+        }
+            
+        
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void txtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumeroKeyTyped
+        // TODO add your handling code here:
+        Funcoes.permitirSomenteNumeros(evt);
+    }//GEN-LAST:event_txtNumeroKeyTyped
+
+    private void txtCEPKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCEPKeyTyped
+        // TODO add your handling code here:
+        Funcoes.permitirSomenteNumeros(evt);
+    }//GEN-LAST:event_txtCEPKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
