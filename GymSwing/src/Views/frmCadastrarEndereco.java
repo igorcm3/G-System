@@ -52,6 +52,8 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de endereço");
 
+        painelEndereço.setBackground(new java.awt.Color(255, 255, 255));
+
         txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtNumeroKeyTyped(evt);

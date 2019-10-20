@@ -134,7 +134,7 @@ public class Treino implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Treino[ idTreino=" + idTreino + " ]";
+        return nome + "= qtd: "+ quantidadeSemana+ " dias: "+diasSemana;
     }
 
     @XmlTransient
