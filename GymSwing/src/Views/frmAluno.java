@@ -491,6 +491,7 @@ public class frmAluno extends javax.swing.JDialog {
     public boolean atualizarEnderecoAluno() {
         // na tela de endereços, passa o endereço para o objeto gloal de aluno dessa tela
         // essa função apenas preenche os componentes com o endereço.
+        aluno.setIdEndereco(this.endereco);
         lblEndereco.setText("End: " + aluno.getIdEndereco().getEndereco());
         lblNumero.setText("Nº: " + aluno.getIdEndereco().getNumero());
         lblCidade.setText("Cidade: " + aluno.getIdEndereco().getCidade());

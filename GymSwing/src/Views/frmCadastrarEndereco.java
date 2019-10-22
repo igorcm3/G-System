@@ -17,6 +17,8 @@ import Uteis.Funcoes;
  */
 public class frmCadastrarEndereco extends javax.swing.JDialog {
     protected frmAluno frameAluno;
+    private boolean novoEndereco;
+    private Endereco enderecoEdicao;
     /**
      * Creates new form frmCadastrarEndereco
      */
@@ -24,8 +26,27 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
         setModal(modal);
         initComponents();
         setLocationRelativeTo(null);
-        this.frameAluno = framAluno;
-        
+        this.frameAluno = framAluno;   
+        this.novoEndereco = true;
+    }
+    public frmCadastrarEndereco(boolean modal, frmAluno framAluno, Endereco enderecoEdicao) {
+        setModal(modal);
+        initComponents();
+        setLocationRelativeTo(null);
+        this.frameAluno = framAluno;   
+        this.novoEndereco = false;
+        this.enderecoEdicao = enderecoEdicao;
+        carregarDadosEndereco();
+    }  
+    
+    public void carregarDadosEndereco(){
+        txtEndereco.setText(enderecoEdicao.getEndereco());
+        txtNumero.setText(enderecoEdicao.getNumero());
+        txtComplemento.setText(enderecoEdicao.getComplemento());
+        txtReferencia.setText(enderecoEdicao.getReferencia());
+        txtCEP.setText(enderecoEdicao.getCep());
+        txtCidade.setText(enderecoEdicao.getCidade());
+        txtUF.setText(enderecoEdicao.getUf());
     }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -199,28 +220,26 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
-        Endereco ed = new Endereco();
         EnderecoDAO edDAO = new EnderecoDAO();
-        
-        // Alimentando o model
-        
-        ed.setEndereco(txtEndereco.getText());
-        ed.setNumero(txtNumero.getText());
-        ed.setComplemento(txtComplemento.getText());
-        ed.setReferencia(txtReferencia.getText());
-        ed.setCep(txtCEP.getText());
-        ed.setCidade(txtCidade.getText());
-        ed.setUf(txtUF.getText());
+        if (novoEndereco) { enderecoEdicao = new Endereco();}
+        enderecoEdicao.setEndereco(txtEndereco.getText());
+        enderecoEdicao.setNumero(txtNumero.getText());
+        enderecoEdicao.setComplemento(txtComplemento.getText());
+        enderecoEdicao.setReferencia(txtReferencia.getText());
+        enderecoEdicao.setCep(txtCEP.getText());
+        enderecoEdicao.setCidade(txtCidade.getText());
+        enderecoEdicao.setUf(txtUF.getText());
         // gravando modelo, merge é para caso seja edição.
-        
-        edDAO.merge(ed);
+        if (novoEndereco) {
+            edDAO.merge(enderecoEdicao);
+        }
         //seta o endereço para a tela de aluno
-        frameAluno.setEndereco(ed);
+        frameAluno.setEndereco(enderecoEdicao);
         boolean result = frameAluno.atualizarEnderecoAluno();
         if (result) {
             JOptionPane.showMessageDialog(null, "Endereço salvo com sucesso!", "Endereço", 1);    
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar endereço!", "Endereço", 1);    
+            JOptionPane.showMessageDialog(null, "Erro ao cadastrar\\salvar endereço!", "Endereço", 1);    
         }
             
         
