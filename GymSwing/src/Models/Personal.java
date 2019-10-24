@@ -134,7 +134,7 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return nome;
+        return codigo+"-"+nome;
     }
 
     @XmlTransient

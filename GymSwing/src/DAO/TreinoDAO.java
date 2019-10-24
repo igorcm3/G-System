@@ -48,10 +48,19 @@ public class TreinoDAO {
         return lista;
     }
 
-    public Treino getPersonalPorId(int id) {
+    public Treino getTreinoPorId(int id) {
 
         Treino emp = (Treino) em.createQuery("from Treino u where idTreino = " + String.valueOf(id) + "").getSingleResult();
         return emp;
     }
 
+    public Treino getTreinoPorCod(String cod) {
+        Treino emp = (Treino) em.createQuery("from Treino u where codigo = " + cod + "").getSingleResult();
+        return emp;
+    }
+    
+    public String getUltimoCodigo(){
+        Treino treino = (Treino) em.createQuery("from Treino u order by desc").getSingleResult();
+        return treino.getCodigo();
+    }
 }

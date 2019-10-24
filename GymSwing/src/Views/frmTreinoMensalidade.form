@@ -49,7 +49,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -95,7 +95,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
               </Group>
@@ -354,7 +354,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblInfoTreino" alignment="0" max="32767" attributes="0"/>
-                              <Component id="lblInfotreino2" alignment="1" max="32767" attributes="0"/>
+                              <Component id="lblInfoTreino2" alignment="1" max="32767" attributes="0"/>
                               <Component id="lblinfoTreino3" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -367,7 +367,7 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="lblInfoTreino" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lblInfotreino2" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblInfoTreino2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lblinfoTreino3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
@@ -381,9 +381,9 @@
                     <Property name="text" type="java.lang.String" value="Treino: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lblInfotreino2">
+                <Component class="javax.swing.JLabel" name="lblInfoTreino2">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Utuliza personal:"/>
+                    <Property name="text" type="java.lang.String" value="Utiliza personal:"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblinfoTreino3">
@@ -487,10 +487,13 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnSalvar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalvarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>

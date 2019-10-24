@@ -134,7 +134,8 @@ public class Treino implements Serializable {
 
     @Override
     public String toString() {
-        return nome + "= qtd: "+ quantidadeSemana+ " dias: "+diasSemana;
+        //return nome + "= qtd: "+ quantidadeSemana+ " dias: "+ diasSemana;
+        return codigo + "-" + nome;
     }
 
     @XmlTransient

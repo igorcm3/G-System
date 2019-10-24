@@ -1,12 +1,18 @@
 package Views;
 
+import DAO.MensalidadeDAO;
 import DAO.TreinoDAO;
+import Models.Mensalidade;
 import Models.Treino;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 public class frmTreinoMensalidade extends javax.swing.JDialog {
 
+    protected Treino treino;
+    protected Mensalidade mensalidade;
     protected frmAluno frameAluno;
 
     public frmTreinoMensalidade(boolean modal, frmAluno framAluno) {
@@ -16,8 +22,9 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         this.frameAluno = framAluno;
         carregarTreinoMensalidade();
         carregarTreinos();
+        mensalidade = new Mensalidade();
     }
-    
+
     public void carregarTreinos() {
 
         TreinoDAO pDAO = new TreinoDAO();
@@ -40,6 +47,48 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         cbStatus.setEnabled(hab);
     }
 
+    private void PreencherLabelsTreino() {
+        lblInfoTreino.setText("Treino: " +treino.getCodigo()+"-"+ treino.getNome());
+        if (rbUsaPersonalSim.isSelected()) {
+            lblInfoTreino2.setText("Utiliza personal: Sim");
+        } else {
+            lblInfoTreino2.setText("Utiliza personal: Não");
+        }
+        lblinfoTreino3.setText("Mensalidade sugerida: R$ " + getMensalidadeSugerida());
+
+    }
+
+    private String getMensalidadeSugerida() {
+        String valor = "";
+        switch (cbTreinos.getSelectedIndex()) {
+            case 0:
+                valor = "100.00";
+                break;
+            case 1:
+                valor = "80.00";
+                break;
+            case 2:
+                valor = "50.00";
+                break;
+            case 3:
+                valor = "50.00";
+                break;
+            default:
+                valor = "";
+        }
+        return valor;
+    }
+
+    private void selecionarTreinoCombo() {
+        TreinoDAO pDAO = new TreinoDAO();
+        treino = pDAO.getTreinoPorCod(cbTreinos.getSelectedItem().toString().substring(0, 4));
+    }
+    
+    private void habilidaAtribuiMensalidade(){
+        habilitaMensalidade(true);
+        txtValor.setText(getMensalidadeSugerida());
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -57,7 +106,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         painelResumoTreino = new javax.swing.JPanel();
         lblInfoTreino = new javax.swing.JLabel();
-        lblInfotreino2 = new javax.swing.JLabel();
+        lblInfoTreino2 = new javax.swing.JLabel();
         lblinfoTreino3 = new javax.swing.JLabel();
         painelMensalidade = new javax.swing.JPanel();
         txtValor = new javax.swing.JTextField();
@@ -65,7 +114,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cbStatus = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnSalvar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         lblMensalidade = new javax.swing.JLabel();
         lblTreino = new javax.swing.JLabel();
@@ -176,7 +225,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
         lblInfoTreino.setText("Treino: ");
 
-        lblInfotreino2.setText("Utuliza personal:");
+        lblInfoTreino2.setText("Utiliza personal:");
 
         lblinfoTreino3.setText("Mensalidade sugerida:");
 
@@ -188,7 +237,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblInfoTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblInfotreino2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblInfoTreino2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblinfoTreino3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -198,7 +247,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblInfoTreino)
                 .addGap(18, 18, 18)
-                .addComponent(lblInfotreino2)
+                .addComponent(lblInfoTreino2)
                 .addGap(18, 18, 18)
                 .addComponent(lblinfoTreino3)
                 .addGap(23, 23, 23))
@@ -291,7 +340,12 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addContainerGap(127, Short.MAX_VALUE))
         );
 
-        jButton1.setText("Salvar");
+        btnSalvar.setText("Salvar");
+        btnSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -319,7 +373,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(painelFundoLayout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2))
                     .addGroup(painelFundoLayout.createSequentialGroup()
@@ -353,7 +407,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnSalvar))
                 .addGap(22, 22, 22))
         );
 
@@ -388,6 +442,9 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
     private void btnConfirmarTreinmoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarTreinmoActionPerformed
         // TODO add your handling code here:
+        selecionarTreinoCombo();
+        PreencherLabelsTreino();
+        habilidaAtribuiMensalidade();
     }//GEN-LAST:event_btnConfirmarTreinmoActionPerformed
 
     private void rbUsaPersonalSimMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rbUsaPersonalSimMouseClicked
@@ -410,13 +467,28 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_rbUsaPersonalNaoMouseClicked
 
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        // TODO add your handling code here:
+        
+        mensalidade.setIdTreino(treino);
+        mensalidade.setPago(cbStatus.getSelectedIndex() == 0);
+        mensalidade.setValor(Float.parseFloat(txtValor.getText()));
+        mensalidade.setDataPagamento(new Date());
+        MensalidadeDAO mDAO = new MensalidadeDAO();
+        mDAO.persist(mensalidade);
+        frameAluno.setMensalidade(mensalidade);
+        frameAluno.atualizarMensalidade();
+        JOptionPane.showMessageDialog(null, "Mensalidade gerada com suceso!", "Mensalidade", 1);
+        
+    }//GEN-LAST:event_btnSalvarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarTreinmo;
     private javax.swing.JButton btnNovoTreino;
+    private javax.swing.JButton btnSalvar;
     private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JComboBox<String> cbTreinos;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -424,7 +496,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblInfoTreino;
-    private javax.swing.JLabel lblInfotreino2;
+    private javax.swing.JLabel lblInfoTreino2;
     private javax.swing.JLabel lblMensalidade;
     private javax.swing.JLabel lblTreino;
     private javax.swing.JLabel lblinfoTreino3;

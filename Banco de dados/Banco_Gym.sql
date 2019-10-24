@@ -103,6 +103,11 @@ insert into Mensalidade values (0, False, '0001', 70.00, curdate(),null);
 
 insert into Aluno values (0, '0001', 'Gabriela Rhoden', '9999999', 'F', '05805805805', 1, null, null, 1);
 
+-- Treinos padrão, obrigatorios:
+insert into Treino values (0,'0001', 'Todos os dias da semana.', 'Semanal', 'todos', 5);
+insert into Treino values (0,'0002', '3 vezes por semana', '3x semana', 'seg, quart, quint', 3);
+insert into Treino values (0,'0003', '2 vezes por semana', '2x semana', 'ter, quart', 2);
+
 
 select * from Empresa;
 select * from Endereco;
@@ -110,6 +115,8 @@ select * from Endereco;
 -- -- select * from Medidas;
 
 select * from Aluno;
+
+select * from treino;
 
 
 select a.nome, m.valor, m.pago from Aluno a left join Mensalidade m on (m.idMensalidade = a.idMensalidade);
