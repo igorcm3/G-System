@@ -53,7 +53,7 @@ public class Aluno implements Serializable {
     @Column(name = "rgcpf")
     private String rgcpf;
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Endereco idEndereco;
     @JoinColumn(name = "idPersonal", referencedColumnName = "idPersonal")
     @ManyToOne

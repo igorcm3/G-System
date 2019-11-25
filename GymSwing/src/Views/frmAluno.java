@@ -5,6 +5,7 @@
  */
 package Views;
 
+import DAO.AlunoDAO;
 import DAO.PersonalDAO;
 import Models.Aluno;
 import Models.Endereco;
@@ -47,7 +48,7 @@ public class frmAluno extends javax.swing.JDialog {
     }
 
     public void atualizarMensalidade() {
-        lblTreino.setText(mensalidade.getIdTreino().toString() +"  "+ mensalidade.getIdTreino().getQuantidadeSemana()+"x");
+        lblTreino.setText(mensalidade.getIdTreino().toString() + "  " + mensalidade.getIdTreino().getQuantidadeSemana() + "x");
         lblMensalidade.setText(mensalidade.getValor() + " - " + mensalidade.getDataPagamento().toString());
         if (mensalidade.getPago()) {
             lblStatusMensalidade.setBackground(Color.green);
@@ -66,20 +67,20 @@ public class frmAluno extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnSalvarAluno = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt1 = new javax.swing.JTextField();
+        txtNome = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         rbMasc = new javax.swing.JRadioButton();
         rbFem = new javax.swing.JRadioButton();
         jLabel3 = new javax.swing.JLabel();
-        txt2 = new javax.swing.JTextField();
+        txtCelular = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txt4 = new javax.swing.JTextField();
+        txtRgCpf = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         btnEndereco = new javax.swing.JButton();
         lblEndereco = new javax.swing.JLabel();
@@ -110,17 +111,17 @@ public class frmAluno extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSalvarAluno.setText("Salvar");
+        btnSalvarAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnSalvarAlunoActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Sair");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnSairActionPerformed(evt);
             }
         });
 
@@ -153,17 +154,17 @@ public class frmAluno extends javax.swing.JDialog {
 
         jLabel3.setText("Celular");
 
-        txt2.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCelular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt2KeyTyped(evt);
+                txtCelularKeyTyped(evt);
             }
         });
 
         jLabel5.setText("CPF");
 
-        txt4.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtRgCpf.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txt4KeyTyped(evt);
+                txtRgCpfKeyTyped(evt);
             }
         });
 
@@ -185,7 +186,7 @@ public class frmAluno extends javax.swing.JDialog {
                         .addGap(24, 24, 24)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(rbMasc)
-                            .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rbFem)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -193,8 +194,8 @@ public class frmAluno extends javax.swing.JDialog {
                             .addComponent(jLabel5))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtRgCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -207,7 +208,7 @@ public class frmAluno extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(rbMasc)
@@ -217,11 +218,11 @@ public class frmAluno extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtRgCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -335,7 +336,7 @@ public class frmAluno extends javax.swing.JDialog {
                     .addComponent(jScrollPane1)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton7)))
                 .addContainerGap())
         );
@@ -383,10 +384,10 @@ public class frmAluno extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -435,9 +436,9 @@ public class frmAluno extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(btnSalvarAluno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(btnSair))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -463,8 +464,8 @@ public class frmAluno extends javax.swing.JDialog {
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnSalvarAluno)
+                    .addComponent(btnSair))
                 .addContainerGap())
         );
 
@@ -513,19 +514,19 @@ public class frmAluno extends javax.swing.JDialog {
         frmPersonais.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnSairActionPerformed
 
-    private void txt2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt2KeyTyped
+    private void txtCelularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCelularKeyTyped
         Funcoes.permitirSomenteNumeros(evt);
-    }//GEN-LAST:event_txt2KeyTyped
+    }//GEN-LAST:event_txtCelularKeyTyped
 
-    private void txt4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt4KeyTyped
+    private void txtRgCpfKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRgCpfKeyTyped
         // TODO add your handling code here:
         Funcoes.permitirSomenteNumeros(evt);
-    }//GEN-LAST:event_txt4KeyTyped
+    }//GEN-LAST:event_txtRgCpfKeyTyped
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -533,9 +534,43 @@ public class frmAluno extends javax.swing.JDialog {
         frmMensalidade.setVisible(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnSalvarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarAlunoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        if (!validarObjetos()) {
+            System.exit(0);
+        } else {
+            salvarAluno();
+        }
+    }//GEN-LAST:event_btnSalvarAlunoActionPerformed
+
+    public Boolean validarObjetos() {
+        return true;
+        // funcoes de validação dos objetos globais., return iniciar com false, ficar true caso passe todos.
+
+    }
+
+    public void salvarAluno() {
+        AlunoDAO alunoDAO = new AlunoDAO();
+        // objetos -> chaves estrangeiras em aluno, somente mensalidade é not null.
+        this.aluno.setIdEndereco(endereco);
+        this.aluno.setIdMedidas(medidas);
+        this.aluno.setIdPersonal(personal);
+        this.mensalidade.setIdTreino(treino);
+        this.aluno.setIdMensalidade(mensalidade);
+        // demais campos --> campos que são preenchidos direto na tela
+        this.aluno.setCodigo(Funcoes.validaIncrementaCodigo(alunoDAO.getUltimoCodAluno()));
+        this.aluno.setNome(txtNome.getText());
+        if (rbMasc.isSelected()) {
+            this.aluno.setSexo('M');
+        }else{
+            this.aluno.setSexo('F');
+        }
+        this.aluno.setCelular(txtCelular.getText());
+        this.aluno.setRgcpf(txtRgCpf.getText());
+        alunoDAO.persist(aluno);
+        Funcoes.MsgSimples("Aluno salvo com sucesso","Cadastro de aluno");
+        
+    }
 
     public void PreencherCamposAluno(boolean novoAluno) {
         if (novoAluno = false) {
@@ -568,6 +603,7 @@ public class frmAluno extends javax.swing.JDialog {
         DefaultComboBoxModel defaultComboBox = new DefaultComboBoxModel();
         for (Personal ps : p) {
             defaultComboBox.addElement(ps);
+            personal = ps;
         }
         cbPersonais.setModel(defaultComboBox);
 
@@ -575,9 +611,9 @@ public class frmAluno extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEndereco;
+    private javax.swing.JButton btnSair;
+    private javax.swing.JButton btnSalvarAluno;
     private javax.swing.JComboBox<String> cbPersonais;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
@@ -610,9 +646,9 @@ public class frmAluno extends javax.swing.JDialog {
     private javax.swing.JLabel lblTreino;
     private javax.swing.JRadioButton rbFem;
     private javax.swing.JRadioButton rbMasc;
-    private javax.swing.JTextField txt1;
-    private javax.swing.JTextField txt2;
-    private javax.swing.JTextField txt4;
+    private javax.swing.JTextField txtCelular;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtRgCpf;
     // End of variables declaration//GEN-END:variables
 
     public Aluno getAluno() {

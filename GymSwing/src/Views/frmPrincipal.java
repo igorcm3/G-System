@@ -87,7 +87,6 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pnFrmPrincipal = new javax.swing.JPanel();
         txtPainelInfo = new javax.swing.JPanel();
-        lblUserLogado = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
         lblVersaoSistema = new javax.swing.JLabel();
@@ -106,14 +105,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(900, 500));
 
         pnFrmPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        pnFrmPrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 122, 217), 2));
+        pnFrmPrincipal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255), 2));
         pnFrmPrincipal.setPreferredSize(new java.awt.Dimension(900, 492));
 
-        txtPainelInfo.setBackground(new java.awt.Color(0, 122, 217));
+        txtPainelInfo.setBackground(new java.awt.Color(237, 241, 244));
         txtPainelInfo.setPreferredSize(new java.awt.Dimension(900, 39));
-
-        lblUserLogado.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        lblUserLogado.setText("usuario logado");
 
         lblData.setText("Data");
 
@@ -132,11 +128,9 @@ public class frmPrincipal extends javax.swing.JFrame {
             .addGroup(txtPainelInfoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
-                .addComponent(lblUserLogado, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 237, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(lblVersaoSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 465, Short.MAX_VALUE)
                 .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
                 .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,12 +142,11 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblUserLogado)
-                        .addComponent(lblEmpresa))
+                        .addComponent(lblEmpresa)
+                        .addComponent(lblVersaoSistema))
                     .addGroup(txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblHora)
-                        .addComponent(lblData)
-                        .addComponent(lblVersaoSistema)))
+                        .addComponent(lblData)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -252,7 +245,6 @@ public class frmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblHora;
-    private javax.swing.JLabel lblUserLogado;
     private javax.swing.JLabel lblVersaoSistema;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuNovo;
