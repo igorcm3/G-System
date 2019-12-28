@@ -6,6 +6,8 @@
 package Uteis;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
@@ -47,5 +49,20 @@ public class Funcoes {
         // usar constantes para implementar msgs
         JOptionPane.showMessageDialog(null, msg, titulo, 1);
     }
+    
+    public static void setLookAndFellSistema() {
+        try {
+            UIManager.setLookAndFeel(
+                    UIManager.getSystemLookAndFeelClassName());
+        } catch (UnsupportedLookAndFeelException ex) {
+            ex.printStackTrace();
+        } catch (InstantiationException ex) {
+            ex.printStackTrace();
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }    
 
 }

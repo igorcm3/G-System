@@ -7,6 +7,7 @@ package Views;
 
 import DAO.EmpresaDAO;
 import Models.Empresa;
+import Uteis.Funcoes;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -22,17 +23,15 @@ import javax.swing.ImageIcon;
  * @author coron
  */
 public class frmPrincipal extends javax.swing.JFrame {
-
+    // Atributos
     private ImageIcon imgAlu;
-
-    /**
-     * Creates new form frmPrincipal
-     */
+    
     public frmPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
         setInfos();
         setIconAluno(2);
+        Funcoes.setLookAndFellSistema();
     }
 
     public void setInfos() {
@@ -221,6 +220,15 @@ public class frmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static void main(String args[]) {
+
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new frmPrincipal().setVisible(true);
+            }
+        });
+    }
+        
     private void alunoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoMenuActionPerformed
         // TODO add your handling code here:
         frmListarAlunos listarAlunos = new frmListarAlunos(true);

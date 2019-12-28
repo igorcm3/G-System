@@ -47,8 +47,8 @@ public class AlunoDAO {
         em.getTransaction().commit();
     }
 
-    // Listar empresas
-    public List<Aluno> listarEnderecos() {
+   
+    public List<Aluno> listarAlunos() {
         List<Aluno> lista = null;
         lista = em.createQuery("from Aluno u ").getResultList();
         return lista;
