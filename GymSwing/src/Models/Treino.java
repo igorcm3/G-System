@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author blank
+ * @author Igor Corona
  */
 @Entity
-@Table(name = "Treino")
+@Table(name = "treino")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Treino.findAll", query = "SELECT t FROM Treino t")
@@ -36,9 +36,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Treino.findByDiasSemana", query = "SELECT t FROM Treino t WHERE t.diasSemana = :diasSemana")
     , @NamedQuery(name = "Treino.findByQuantidadeSemana", query = "SELECT t FROM Treino t WHERE t.quantidadeSemana = :quantidadeSemana")})
 public class Treino implements Serializable {
-
-    @OneToMany(mappedBy = "idTreino")
-    private Collection<Mensalidade> mensalidadeCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,6 +53,8 @@ public class Treino implements Serializable {
     private String diasSemana;
     @Column(name = "quantidadeSemana")
     private Integer quantidadeSemana;
+    @OneToMany(mappedBy = "idTreino")
+    private Collection<Mensalidade> mensalidadeCollection;
 
     public Treino() {
     }
@@ -112,6 +111,15 @@ public class Treino implements Serializable {
         this.quantidadeSemana = quantidadeSemana;
     }
 
+    @XmlTransient
+    public Collection<Mensalidade> getMensalidadeCollection() {
+        return mensalidadeCollection;
+    }
+
+    public void setMensalidadeCollection(Collection<Mensalidade> mensalidadeCollection) {
+        this.mensalidadeCollection = mensalidadeCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -134,17 +142,7 @@ public class Treino implements Serializable {
 
     @Override
     public String toString() {
-        //return nome + "= qtd: "+ quantidadeSemana+ " dias: "+ diasSemana;
-        return codigo + "-" + nome;
-    }
-
-    @XmlTransient
-    public Collection<Mensalidade> getMensalidadeCollection() {
-        return mensalidadeCollection;
-    }
-
-    public void setMensalidadeCollection(Collection<Mensalidade> mensalidadeCollection) {
-        this.mensalidadeCollection = mensalidadeCollection;
+        return nome +" - "+ descricao + " - " + quantidadeSemana + "X na semana.";
     }
     
 }

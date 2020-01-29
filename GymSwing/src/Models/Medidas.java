@@ -6,26 +6,25 @@
 package Models;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author blank
+ * @author Igor Corona
  */
 @Entity
-@Table(name = "Medidas")
+@Table(name = "medidas")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Medidas.findAll", query = "SELECT m FROM Medidas m")
@@ -41,9 +40,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Medidas.findByAltura", query = "SELECT m FROM Medidas m WHERE m.altura = :altura")
     , @NamedQuery(name = "Medidas.findByPctGordura", query = "SELECT m FROM Medidas m WHERE m.pctGordura = :pctGordura")})
 public class Medidas implements Serializable {
-
-    @OneToMany(mappedBy = "idMedidas")
-    private Collection<Aluno> alunoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -72,6 +68,9 @@ public class Medidas implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "pctGordura")
     private Float pctGordura;
+    @JoinColumn(name = "idAluno", referencedColumnName = "idAluno")
+    @ManyToOne(optional = false)
+    private Aluno idAluno;
 
     public Medidas() {
     }
@@ -168,6 +167,14 @@ public class Medidas implements Serializable {
         this.pctGordura = pctGordura;
     }
 
+    public Aluno getIdAluno() {
+        return idAluno;
+    }
+
+    public void setIdAluno(Aluno idAluno) {
+        this.idAluno = idAluno;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -191,15 +198,6 @@ public class Medidas implements Serializable {
     @Override
     public String toString() {
         return "Models.Medidas[ idMedidas=" + idMedidas + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Aluno> getAlunoCollection() {
-        return alunoCollection;
-    }
-
-    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
-        this.alunoCollection = alunoCollection;
     }
     
 }

@@ -2,20 +2,20 @@ package Views;
 
 import DAO.AlunoDAO;
 import Models.Aluno;
-import Uteis.Funcoes;
-import java.util.ArrayList;
+import java.awt.Color;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 public class frmListarAlunos extends javax.swing.JDialog {
-
+    private ImageIcon imgAlu;
     private DefaultTableModel dtm;
 
     public frmListarAlunos(Boolean modal) {
         setModal(modal);
         initComponents();
         setLocationRelativeTo(null);
-        atualizaTabela();
+        atualizaTabela();       
     }
 
     // metodos
@@ -84,28 +84,148 @@ public class frmListarAlunos extends javax.swing.JDialog {
     private void initComponents() {
 
         pnListarAlunos = new javax.swing.JPanel();
+        painelCabecalho = new javax.swing.JPanel();
+        jSeparator2 = new javax.swing.JSeparator();
+        lblBtnAdd = new javax.swing.JLabel();
+        lblBtnRemover = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        painelPesquisar = new javax.swing.JPanel();
+        txtPesquisa = new javax.swing.JFormattedTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        lblBtnProcurar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableAlunos = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Alunos");
         setResizable(false);
+        getContentPane().setLayout(new java.awt.BorderLayout(20, 0));
 
         pnListarAlunos.setBackground(new java.awt.Color(255, 255, 255));
+        pnListarAlunos.setPreferredSize(new java.awt.Dimension(790, 490));
+        pnListarAlunos.setLayout(new javax.swing.BoxLayout(pnListarAlunos, javax.swing.BoxLayout.Y_AXIS));
+
+        painelCabecalho.setBackground(new java.awt.Color(255, 255, 255));
+        painelCabecalho.setPreferredSize(new java.awt.Dimension(790, 100));
+        painelCabecalho.setRequestFocusEnabled(false);
+
+        jSeparator2.setForeground(new java.awt.Color(102, 102, 102));
+        jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        lblBtnAdd.setBackground(new java.awt.Color(153, 255, 255));
+        lblBtnAdd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBtnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/add_60.png"))); // NOI18N
+        lblBtnAdd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblBtnAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBtnAddMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblBtnAddMouseReleased(evt);
+            }
+        });
+
+        lblBtnRemover.setBackground(new java.awt.Color(153, 255, 255));
+        lblBtnRemover.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lixeira_60_1.png"))); // NOI18N
+        lblBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        lblBtnRemover.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBtnRemoverMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblBtnRemoverMouseReleased(evt);
+            }
+        });
+
+        jSeparator3.setForeground(new java.awt.Color(102, 102, 102));
+        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jSeparator4.setForeground(new java.awt.Color(102, 102, 102));
+        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        painelPesquisar.setBackground(new java.awt.Color(255, 255, 255));
+        painelPesquisar.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true), "Pesquisar"));
+
+        txtPesquisa.setDisabledTextColor(new java.awt.Color(204, 204, 204));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        lblBtnProcurar.setBackground(new java.awt.Color(153, 255, 255));
+        lblBtnProcurar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBtnProcurar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/search_48.png"))); // NOI18N
+        lblBtnProcurar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout painelPesquisarLayout = new javax.swing.GroupLayout(painelPesquisar);
+        painelPesquisar.setLayout(painelPesquisarLayout);
+        painelPesquisarLayout.setHorizontalGroup(
+            painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelPesquisarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblBtnProcurar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        painelPesquisarLayout.setVerticalGroup(
+            painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblBtnProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(painelPesquisarLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelPesquisarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout painelCabecalhoLayout = new javax.swing.GroupLayout(painelCabecalho);
+        painelCabecalho.setLayout(painelCabecalhoLayout);
+        painelCabecalhoLayout.setHorizontalGroup(
+            painelCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCabecalhoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(painelPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(lblBtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        painelCabecalhoLayout.setVerticalGroup(
+            painelCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelCabecalhoLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addGroup(painelCabecalhoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(painelPesquisar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator3)
+                    .addComponent(jSeparator4)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelCabecalhoLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(lblBtnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelCabecalhoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblBtnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
+        );
+
+        pnListarAlunos.add(painelCabecalho);
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jScrollPane1.setBorder(null);
 
-        tableAlunos.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        tableAlunos.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        tableAlunos.setForeground(new java.awt.Color(0, 102, 255));
+        tableAlunos.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        tableAlunos.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         tableAlunos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -122,9 +242,12 @@ public class frmListarAlunos extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
+        tableAlunos.setFocusCycleRoot(true);
         tableAlunos.setGridColor(new java.awt.Color(255, 255, 255));
         tableAlunos.setIntercellSpacing(new java.awt.Dimension(1, 5));
         tableAlunos.setRowHeight(22);
+        tableAlunos.setSelectionBackground(new java.awt.Color(161, 203, 235));
+        tableAlunos.setSelectionForeground(new java.awt.Color(51, 51, 255));
         tableAlunos.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tableAlunos);
         if (tableAlunos.getColumnModel().getColumnCount() > 0) {
@@ -141,118 +264,54 @@ public class frmListarAlunos extends javax.swing.JDialog {
             tableAlunos.getColumnModel().getColumn(4).setResizable(false);
         }
 
-        jButton1.setText("Novo aluno");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+        pnListarAlunos.add(jScrollPane1);
 
-        jButton2.setText("Excluir");
-
-        jLabel1.setText("Opções de filtro");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Buscar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Aluno:");
-
-        javax.swing.GroupLayout pnListarAlunosLayout = new javax.swing.GroupLayout(pnListarAlunos);
-        pnListarAlunos.setLayout(pnListarAlunosLayout);
-        pnListarAlunosLayout.setHorizontalGroup(
-            pnListarAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnListarAlunosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pnListarAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(pnListarAlunosLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnListarAlunosLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
-                .addContainerGap())
-        );
-        pnListarAlunosLayout.setVerticalGroup(
-            pnListarAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnListarAlunosLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(pnListarAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(pnListarAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(pnListarAlunosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnListarAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnListarAlunos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(pnListarAlunos, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void lblBtnAddMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnAddMousePressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        imgAlu = new ImageIcon("src\\Imagens\\add_30.png");
+        lblBtnAdd.setIcon(imgAlu);
+    }//GEN-LAST:event_lblBtnAddMousePressed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void lblBtnAddMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnAddMouseReleased
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        imgAlu = new ImageIcon("src\\Imagens\\add_60.png");
+        lblBtnAdd.setIcon(imgAlu);
+        frmAluno telaAluno = new frmAluno(true, true);
+        telaAluno.setVisible(true);        
+    }//GEN-LAST:event_lblBtnAddMouseReleased
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void lblBtnRemoverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnRemoverMousePressed
         // TODO add your handling code here:
-        frmAluno aluno = new frmAluno(true, true);
-        aluno.setVisible(true);
+        imgAlu = new ImageIcon("src\\Imagens\\lixeira_30.png");
+        lblBtnRemover.setIcon(imgAlu);
+    }//GEN-LAST:event_lblBtnRemoverMousePressed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void lblBtnRemoverMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnRemoverMouseReleased
+        // TODO add your handling code here:
+        imgAlu = new ImageIcon("src\\Imagens\\lixeira_60.png");
+        lblBtnRemover.setIcon(imgAlu);
+        //Metodo de exclusao.
+    }//GEN-LAST:event_lblBtnRemoverMouseReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JLabel lblBtnAdd;
+    private javax.swing.JLabel lblBtnProcurar;
+    private javax.swing.JLabel lblBtnRemover;
+    private javax.swing.JPanel painelCabecalho;
+    private javax.swing.JPanel painelPesquisar;
     private javax.swing.JPanel pnListarAlunos;
     private javax.swing.JTable tableAlunos;
+    private javax.swing.JFormattedTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
 }

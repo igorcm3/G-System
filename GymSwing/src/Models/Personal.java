@@ -22,10 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author blank
+ * @author Igor Corona
  */
 @Entity
-@Table(name = "Personal")
+@Table(name = "personal")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Personal.findAll", query = "SELECT p FROM Personal p")
@@ -33,12 +33,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Personal.findByCodigo", query = "SELECT p FROM Personal p WHERE p.codigo = :codigo")
     , @NamedQuery(name = "Personal.findByNome", query = "SELECT p FROM Personal p WHERE p.nome = :nome")
     , @NamedQuery(name = "Personal.findByRgcpf", query = "SELECT p FROM Personal p WHERE p.rgcpf = :rgcpf")
-    , @NamedQuery(name = "Personal.findByCREF", query = "SELECT p FROM Personal p WHERE p.cref = :cref")
     , @NamedQuery(name = "Personal.findByDescricao", query = "SELECT p FROM Personal p WHERE p.descricao = :descricao")})
 public class Personal implements Serializable {
-
-    @OneToMany(mappedBy = "idPersonal")
-    private Collection<Aluno> alunoCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -52,10 +48,10 @@ public class Personal implements Serializable {
     private String nome;
     @Column(name = "rgcpf")
     private String rgcpf;
-    @Column(name = "cref")
-    private String cref;    
     @Column(name = "descricao")
     private String descricao;
+    @OneToMany(mappedBy = "idPersonal")
+    private Collection<Aluno> alunoCollection;
 
     public Personal() {
     }
@@ -96,20 +92,21 @@ public class Personal implements Serializable {
         this.rgcpf = rgcpf;
     }
 
-    public String getCref() {
-        return cref;
-    }
-
-    public void setCref(String cref) {
-        this.cref = cref;
-    }    
-
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    @XmlTransient
+    public Collection<Aluno> getAlunoCollection() {
+        return alunoCollection;
+    }
+
+    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
+        this.alunoCollection = alunoCollection;
     }
 
     @Override
@@ -134,16 +131,7 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return codigo+"-"+nome;
-    }
-
-    @XmlTransient
-    public Collection<Aluno> getAlunoCollection() {
-        return alunoCollection;
-    }
-
-    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
-        this.alunoCollection = alunoCollection;
+        return nome;
     }
     
 }

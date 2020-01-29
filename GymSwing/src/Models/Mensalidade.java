@@ -28,10 +28,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author blank
+ * @author Igor Corona
  */
 @Entity
-@Table(name = "Mensalidade")
+@Table(name = "mensalidade")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Mensalidade.findAll", query = "SELECT m FROM Mensalidade m")
@@ -60,7 +60,7 @@ public class Mensalidade implements Serializable {
     private Date dataPagamento;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMensalidade")
     private Collection<Aluno> alunoCollection;
-    @JoinColumn(name = "id_treino", referencedColumnName = "idTreino")
+    @JoinColumn(name = "idTreino", referencedColumnName = "idTreino")
     @ManyToOne
     private Treino idTreino;
 

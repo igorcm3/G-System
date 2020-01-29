@@ -19,8 +19,6 @@ public class testeInserir {
     public static void main(String[] args) throws SQLException {
         EmpresaDAO dao = new EmpresaDAO();
         Empresa emp = new Empresa();
-        
-        emp.setCodigo("001");
         emp.setCpfcnpj("000.000/001-1");
         emp.setFantasia("Academia Body Master");
         emp.setRazaoSocial("Vagner Zanchett");

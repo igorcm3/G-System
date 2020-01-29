@@ -6,7 +6,9 @@
 package Models;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,15 +18,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author blank
+ * @author Igor Corona
  */
 @Entity
-@Table(name = "Aluno")
+@Table(name = "aluno")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a")
@@ -54,16 +58,15 @@ public class Aluno implements Serializable {
     private String rgcpf;
     @JoinColumn(name = "idEndereco", referencedColumnName = "idEndereco")
     @ManyToOne
-    private Endereco idEndereco;
+    private Enderecos idEndereco;
     @JoinColumn(name = "idPersonal", referencedColumnName = "idPersonal")
     @ManyToOne
     private Personal idPersonal;
     @JoinColumn(name = "idMensalidade", referencedColumnName = "idMensalidade")
     @ManyToOne(optional = false)
     private Mensalidade idMensalidade;
-    @JoinColumn(name = "idMedidas", referencedColumnName = "idMedidas")
-    @ManyToOne
-    private Medidas idMedidas;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
+    private Collection<Medidas> medidasCollection;
 
     public Aluno() {
     }
@@ -120,11 +123,11 @@ public class Aluno implements Serializable {
         this.rgcpf = rgcpf;
     }
 
-    public Endereco getIdEndereco() {
+    public Enderecos getIdEndereco() {
         return idEndereco;
     }
 
-    public void setIdEndereco(Endereco idEndereco) {
+    public void setIdEndereco(Enderecos idEndereco) {
         this.idEndereco = idEndereco;
     }
 
@@ -144,12 +147,13 @@ public class Aluno implements Serializable {
         this.idMensalidade = idMensalidade;
     }
 
-    public Medidas getIdMedidas() {
-        return idMedidas;
+    @XmlTransient
+    public Collection<Medidas> getMedidasCollection() {
+        return medidasCollection;
     }
 
-    public void setIdMedidas(Medidas idMedidas) {
-        this.idMedidas = idMedidas;
+    public void setMedidasCollection(Collection<Medidas> medidasCollection) {
+        this.medidasCollection = medidasCollection;
     }
 
     @Override

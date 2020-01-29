@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package DAO;
-import Models.Endereco;
+import Models.Enderecos;
 import Persistencia.HibernateUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,34 +20,34 @@ public class EnderecoDAO {
         return em;
     }
   
-    public void persist(Endereco end) {
+    public void persist(Enderecos end) {
         em.getTransaction().begin();
         em.persist(end);
         em.getTransaction().commit();
     }
 
-    public void merge(Endereco end) {
+    public void merge(Enderecos end) {
 
         em.getTransaction().begin();
         em.merge(end);
         em.getTransaction().commit();
     }
 
-    public void remove(Endereco end) {
+    public void remove(Enderecos end) {
         em.getTransaction().begin();
         em.remove(end);
         em.getTransaction().commit();
     }
     
     // Listar empresas
-        public List<Endereco> listarEnderecos() {
-        List<Endereco> lista = null;
+        public List<Enderecos> listarEnderecos() {
+        List<Enderecos> lista = null;
         lista = em.createQuery("from Enderecos u ").getResultList();
         return lista;
     }
         
-    public Endereco getEmpresaPorId(int id) {
-        Endereco end =(Endereco) em.createQuery("from Enderecos u where idEnderecos = "+String.valueOf(id)+"").getSingleResult();
+    public Enderecos getEmpresaPorId(int id) {
+        Enderecos end =(Enderecos) em.createQuery("from Enderecos u where idEnderecos = "+String.valueOf(id)+"").getSingleResult();
         return end;
     }
     

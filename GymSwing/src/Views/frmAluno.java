@@ -8,7 +8,7 @@ package Views;
 import DAO.AlunoDAO;
 import DAO.PersonalDAO;
 import Models.Aluno;
-import Models.Endereco;
+import Models.Enderecos;
 import Models.Medidas;
 import Models.Mensalidade;
 import Models.Personal;
@@ -25,7 +25,7 @@ import javax.swing.DefaultComboBoxModel;
 public class frmAluno extends javax.swing.JDialog {
 
     protected Aluno aluno;
-    protected Endereco endereco;
+    protected Enderecos endereco;
     protected Medidas medidas;
     protected Personal personal;
     protected Treino treino;
@@ -46,6 +46,7 @@ public class frmAluno extends javax.swing.JDialog {
         carregarPersonais();
 
     }
+
 
     public void atualizarMensalidade() {
         lblTreino.setText(mensalidade.getIdTreino().toString() + "  " + mensalidade.getIdTreino().getQuantidadeSemana() + "x");
@@ -91,6 +92,8 @@ public class frmAluno extends javax.swing.JDialog {
         cbPersonais = new javax.swing.JComboBox<>();
         jButton5 = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
+        rbPersonalSim = new javax.swing.JRadioButton();
+        rbPersonalNao = new javax.swing.JRadioButton();
         jPanel7 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
@@ -110,6 +113,7 @@ public class frmAluno extends javax.swing.JDialog {
         setTitle("Aluno");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setPreferredSize(new java.awt.Dimension(790, 490));
 
         btnSalvarAluno.setText("Salvar");
         btnSalvarAluno.addActionListener(new java.awt.event.ActionListener() {
@@ -223,7 +227,7 @@ public class frmAluno extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(txtRgCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -242,7 +246,7 @@ public class frmAluno extends javax.swing.JDialog {
 
         lblCidade.setText("Cidade: ");
 
-        lblEstado.setText("SC: ");
+        lblEstado.setText("UF:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -286,6 +290,12 @@ public class frmAluno extends javax.swing.JDialog {
 
         jLabel12.setText("Novo personal");
 
+        rbPersonalSim.setBackground(new java.awt.Color(255, 255, 255));
+        rbPersonalSim.setText("Sim");
+
+        rbPersonalNao.setBackground(new java.awt.Color(255, 255, 255));
+        rbPersonalNao.setText("Não");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -293,27 +303,41 @@ public class frmAluno extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbPersonais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5)))
-                .addContainerGap())
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton5)
+                        .addGap(20, 20, 20))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(rbPersonalNao)
+                                .addGap(18, 18, 18)
+                                .addComponent(rbPersonalSim, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22))
+                            .addComponent(cbPersonais, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbPersonalNao)
+                    .addComponent(rbPersonalSim))
+                .addGap(18, 18, 18)
                 .addComponent(cbPersonais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jButton5))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(22, 22, 22))
         );
 
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true), "Medidas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 12))); // NOI18N
+        jPanel7.setEnabled(false);
 
         jButton7.setText("+");
 
@@ -387,7 +411,7 @@ public class frmAluno extends javax.swing.JDialog {
                 .addComponent(lblTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblMensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -553,7 +577,7 @@ public class frmAluno extends javax.swing.JDialog {
         AlunoDAO alunoDAO = new AlunoDAO();
         // objetos -> chaves estrangeiras em aluno, somente mensalidade é not null.
         this.aluno.setIdEndereco(endereco);
-        this.aluno.setIdMedidas(medidas);
+        //this.aluno.setIdMedidas(medidas);
         this.aluno.setIdPersonal(personal);
         this.mensalidade.setIdTreino(treino);
         this.aluno.setIdMensalidade(mensalidade);
@@ -646,6 +670,8 @@ public class frmAluno extends javax.swing.JDialog {
     private javax.swing.JLabel lblTreino;
     private javax.swing.JRadioButton rbFem;
     private javax.swing.JRadioButton rbMasc;
+    private javax.swing.JRadioButton rbPersonalNao;
+    private javax.swing.JRadioButton rbPersonalSim;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtRgCpf;
@@ -691,11 +717,12 @@ public class frmAluno extends javax.swing.JDialog {
         this.mensalidade = mensalidade;
     }
 
-    public Endereco getEndereco() {
+    public Enderecos getEndereco() {
         return endereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setEndereco(Enderecos endereco) {
         this.endereco = endereco;
     }
+
 }

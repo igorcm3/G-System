@@ -55,8 +55,12 @@ public class TreinoDAO {
     }
 
     public Treino getTreinoPorCod(String cod) {
-        Treino emp = (Treino) em.createQuery("from Treino u where codigo = " + cod + "").getSingleResult();
-        return emp;
+        try {
+            Treino emp = (Treino) em.createQuery("from Treino u where codigo like '%" + cod + "%'").getSingleResult();
+            return emp;
+        } catch (Exception e) {
+            return null;
+        }
     }
     
     public String getUltimoCodigo(){

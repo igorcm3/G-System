@@ -30,7 +30,6 @@ public class frmPrincipal extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         setInfos();
-        setIconAluno(2);
         Funcoes.setLookAndFellSistema();
     }
 
@@ -44,21 +43,6 @@ public class frmPrincipal extends javax.swing.JFrame {
             lblEmpresa.setText(emp.getFantasia()); // para testes, ajsutar depois}
 
         }
-    }
-    
-    public void setIconAluno(int numIcon){
-        BufferedImage img = null;
-        try {
-            // Here set the path to your image
-            if (numIcon == 1) {
-                img = ImageIO.read(new File("src/Imagens/ag1.png"));
-            }else{
-                img = ImageIO.read(new File("src/Imagens/ag2.png"));
-            }     
-        } catch (IOException e) {
-        }
-        imgAlu = new ImageIcon(img);
-        btnAlunoImg.setIcon(imgAlu);
     }
 
     public void AtualizaDataHora() {
@@ -86,11 +70,12 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         pnFrmPrincipal = new javax.swing.JPanel();
         txtPainelInfo = new javax.swing.JPanel();
-        lblData = new javax.swing.JLabel();
-        lblHora = new javax.swing.JLabel();
-        lblVersaoSistema = new javax.swing.JLabel();
         lblEmpresa = new javax.swing.JLabel();
-        btnAlunoImg = new javax.swing.JLabel();
+        lblVersaoSistema = new javax.swing.JLabel();
+        lblHora = new javax.swing.JLabel();
+        lblData = new javax.swing.JLabel();
+        btnAluno = new javax.swing.JPanel();
+        lblAluno = new javax.swing.JLabel();
         menuTopo = new javax.swing.JMenuBar();
         menuNovo = new javax.swing.JMenu();
         alunoMenu = new javax.swing.JMenuItem();
@@ -100,7 +85,6 @@ public class frmPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("G - System");
-        setPreferredSize(new java.awt.Dimension(900, 500));
         setSize(new java.awt.Dimension(900, 500));
 
         pnFrmPrincipal.setBackground(new java.awt.Color(255, 255, 255));
@@ -108,80 +92,104 @@ public class frmPrincipal extends javax.swing.JFrame {
         pnFrmPrincipal.setPreferredSize(new java.awt.Dimension(900, 492));
 
         txtPainelInfo.setBackground(new java.awt.Color(237, 241, 244));
-        txtPainelInfo.setPreferredSize(new java.awt.Dimension(900, 39));
 
-        lblData.setText("Data");
-
-        lblHora.setText("Hora");
+        lblEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        lblEmpresa.setText("Empresa");
 
         lblVersaoSistema.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         lblVersaoSistema.setText("    Sistema versão");
 
-        lblEmpresa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        lblEmpresa.setText("Empresa");
+        lblHora.setText("Hora");
+
+        lblData.setText("Data");
 
         javax.swing.GroupLayout txtPainelInfoLayout = new javax.swing.GroupLayout(txtPainelInfo);
         txtPainelInfo.setLayout(txtPainelInfoLayout);
         txtPainelInfoLayout.setHorizontalGroup(
             txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(txtPainelInfoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblVersaoSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 465, Short.MAX_VALUE)
-                .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblEmpresa, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblVersaoSistema, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 260, Short.MAX_VALUE)
+                .addComponent(lblHora, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         txtPainelInfoLayout.setVerticalGroup(
             txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(txtPainelInfoLayout.createSequentialGroup()
-                .addGap(10, 10, 10)
+                .addGap(5, 5, 5)
                 .addGroup(txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblEmpresa)
-                        .addComponent(lblVersaoSistema))
+                        .addComponent(lblVersaoSistema)
+                        .addComponent(lblEmpresa))
                     .addGroup(txtPainelInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lblHora)
                         .addComponent(lblData)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnAlunoImg.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        btnAlunoImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ag2.png"))); // NOI18N
-        btnAlunoImg.setText("Aluno");
-        btnAlunoImg.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                btnAlunoImgMousePressed(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                btnAlunoImgMouseReleased(evt);
+        btnAluno.setBackground(new java.awt.Color(246, 246, 250));
+        btnAluno.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        btnAluno.setForeground(new java.awt.Color(255, 255, 255));
+        btnAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.N_RESIZE_CURSOR));
+        btnAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAlunoMouseClicked(evt);
             }
         });
+
+        lblAluno.setBackground(new java.awt.Color(0, 0, 0));
+        lblAluno.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblAluno.setText("Alunos");
+
+        javax.swing.GroupLayout btnAlunoLayout = new javax.swing.GroupLayout(btnAluno);
+        btnAluno.setLayout(btnAlunoLayout);
+        btnAlunoLayout.setHorizontalGroup(
+            btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 145, Short.MAX_VALUE)
+            .addGroup(btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btnAlunoLayout.createSequentialGroup()
+                    .addGap(0, 36, Short.MAX_VALUE)
+                    .addComponent(lblAluno)
+                    .addGap(0, 35, Short.MAX_VALUE)))
+        );
+        btnAlunoLayout.setVerticalGroup(
+            btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 29, Short.MAX_VALUE)
+            .addGroup(btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(btnAlunoLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(lblAluno)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
         javax.swing.GroupLayout pnFrmPrincipalLayout = new javax.swing.GroupLayout(pnFrmPrincipal);
         pnFrmPrincipal.setLayout(pnFrmPrincipalLayout);
         pnFrmPrincipalLayout.setHorizontalGroup(
             pnFrmPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(txtPainelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
             .addGroup(pnFrmPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnAlunoImg, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnFrmPrincipalLayout.createSequentialGroup()
+                .addComponent(txtPainelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 876, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         pnFrmPrincipalLayout.setVerticalGroup(
             pnFrmPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFrmPrincipalLayout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(btnAlunoImg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
-                .addComponent(txtPainelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addComponent(btnAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 405, Short.MAX_VALUE)
+                .addComponent(txtPainelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        menuTopo.setBackground(new java.awt.Color(0, 122, 217));
-        menuTopo.setForeground(new java.awt.Color(0, 122, 217));
+        menuTopo.setBackground(new java.awt.Color(255, 255, 255));
+        menuTopo.setForeground(new java.awt.Color(255, 255, 255));
 
         menuNovo.setBackground(new java.awt.Color(0, 122, 217));
         menuNovo.setText("Novo");
@@ -210,11 +218,11 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnFrmPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 945, Short.MAX_VALUE)
+            .addComponent(pnFrmPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnFrmPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+            .addComponent(pnFrmPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
         );
 
         pack();
@@ -235,21 +243,16 @@ public class frmPrincipal extends javax.swing.JFrame {
         listarAlunos.setVisible(true);
     }//GEN-LAST:event_alunoMenuActionPerformed
 
-    private void btnAlunoImgMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlunoImgMouseReleased
+    private void btnAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlunoMouseClicked
         // TODO add your handling code here:
-        setIconAluno(2);
         frmListarAlunos listarAlunos = new frmListarAlunos(true);
         listarAlunos.setVisible(true);        
-    }//GEN-LAST:event_btnAlunoImgMouseReleased
-
-    private void btnAlunoImgMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlunoImgMousePressed
-        // TODO add your handling code here:
-        setIconAluno(1);       
-    }//GEN-LAST:event_btnAlunoImgMousePressed
+    }//GEN-LAST:event_btnAlunoMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem alunoMenu;
-    private javax.swing.JLabel btnAlunoImg;
+    private javax.swing.JPanel btnAluno;
+    private javax.swing.JLabel lblAluno;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblHora;

@@ -45,8 +45,6 @@ public class frmTreino extends javax.swing.JDialog {
         txtDiasSemana = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         btncancelar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de treinos");
@@ -77,8 +75,6 @@ public class frmTreino extends javax.swing.JDialog {
 
         btncancelar.setText("Cancelar");
 
-        jLabel5.setText("Código");
-
         javax.swing.GroupLayout painelFundoLayout = new javax.swing.GroupLayout(painelFundo);
         painelFundo.setLayout(painelFundoLayout);
         painelFundoLayout.setHorizontalGroup(
@@ -95,28 +91,21 @@ public class frmTreino extends javax.swing.JDialog {
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(painelFundoLayout.createSequentialGroup()
-                        .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5))
+                        .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNome)
                             .addComponent(cbQtdDiasSemana, 0, 170, Short.MAX_VALUE)
-                            .addComponent(txtDiasSemana)
-                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtDiasSemana))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         painelFundoLayout.setVerticalGroup(
             painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFundoLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
-                .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -132,7 +121,7 @@ public class frmTreino extends javax.swing.JDialog {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(63, 63, 63)
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btncancelar))
@@ -179,10 +168,8 @@ public class frmTreino extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel painelFundo;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextArea txtDescricao;
     private javax.swing.JTextField txtDiasSemana;
     private javax.swing.JTextField txtNome;

@@ -8,7 +8,6 @@ package Models;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,25 +22,22 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author blank
+ * @author Igor Corona
  */
 @Entity
-@Table(name = "Endereco")
+@Table(name = "enderecos")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Endereco.findAll", query = "SELECT e FROM Endereco e")
-    , @NamedQuery(name = "Endereco.findByIdEndereco", query = "SELECT e FROM Endereco e WHERE e.idEndereco = :idEndereco")
-    , @NamedQuery(name = "Endereco.findByEndereco", query = "SELECT e FROM Endereco e WHERE e.endereco = :endereco")
-    , @NamedQuery(name = "Endereco.findByNumero", query = "SELECT e FROM Endereco e WHERE e.numero = :numero")
-    , @NamedQuery(name = "Endereco.findByComplemento", query = "SELECT e FROM Endereco e WHERE e.complemento = :complemento")
-    , @NamedQuery(name = "Endereco.findByReferencia", query = "SELECT e FROM Endereco e WHERE e.referencia = :referencia")
-    , @NamedQuery(name = "Endereco.findByCep", query = "SELECT e FROM Endereco e WHERE e.cep = :cep")
-    , @NamedQuery(name = "Endereco.findByCidade", query = "SELECT e FROM Endereco e WHERE e.cidade = :cidade")
-    , @NamedQuery(name = "Endereco.findByUf", query = "SELECT e FROM Endereco e WHERE e.uf = :uf")})
-public class Endereco implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idEndereco")
-    private Collection<Aluno> alunoCollection;
+    @NamedQuery(name = "Enderecos.findAll", query = "SELECT e FROM Enderecos e")
+    , @NamedQuery(name = "Enderecos.findByIdEndereco", query = "SELECT e FROM Enderecos e WHERE e.idEndereco = :idEndereco")
+    , @NamedQuery(name = "Enderecos.findByEndereco", query = "SELECT e FROM Enderecos e WHERE e.endereco = :endereco")
+    , @NamedQuery(name = "Enderecos.findByNumero", query = "SELECT e FROM Enderecos e WHERE e.numero = :numero")
+    , @NamedQuery(name = "Enderecos.findByComplemento", query = "SELECT e FROM Enderecos e WHERE e.complemento = :complemento")
+    , @NamedQuery(name = "Enderecos.findByReferencia", query = "SELECT e FROM Enderecos e WHERE e.referencia = :referencia")
+    , @NamedQuery(name = "Enderecos.findByCep", query = "SELECT e FROM Enderecos e WHERE e.cep = :cep")
+    , @NamedQuery(name = "Enderecos.findByCidade", query = "SELECT e FROM Enderecos e WHERE e.cidade = :cidade")
+    , @NamedQuery(name = "Enderecos.findByUf", query = "SELECT e FROM Enderecos e WHERE e.uf = :uf")})
+public class Enderecos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,11 +59,13 @@ public class Endereco implements Serializable {
     private String cidade;
     @Column(name = "uf")
     private String uf;
+    @OneToMany(mappedBy = "idEndereco")
+    private Collection<Aluno> alunoCollection;
 
-    public Endereco() {
+    public Enderecos() {
     }
 
-    public Endereco(Integer idEndereco) {
+    public Enderecos(Integer idEndereco) {
         this.idEndereco = idEndereco;
     }
 
@@ -135,6 +133,15 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
+    @XmlTransient
+    public Collection<Aluno> getAlunoCollection() {
+        return alunoCollection;
+    }
+
+    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
+        this.alunoCollection = alunoCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -145,10 +152,10 @@ public class Endereco implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Endereco)) {
+        if (!(object instanceof Enderecos)) {
             return false;
         }
-        Endereco other = (Endereco) object;
+        Enderecos other = (Enderecos) object;
         if ((this.idEndereco == null && other.idEndereco != null) || (this.idEndereco != null && !this.idEndereco.equals(other.idEndereco))) {
             return false;
         }
@@ -157,16 +164,7 @@ public class Endereco implements Serializable {
 
     @Override
     public String toString() {
-        return "Models.Endereco[ idEndereco=" + idEndereco + " ]";
-    }
-
-    @XmlTransient
-    public Collection<Aluno> getAlunoCollection() {
-        return alunoCollection;
-    }
-
-    public void setAlunoCollection(Collection<Aluno> alunoCollection) {
-        this.alunoCollection = alunoCollection;
+        return "Models.Enderecos[ idEndereco=" + idEndereco + " ]";
     }
     
 }

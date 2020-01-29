@@ -19,15 +19,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author blank
+ * @author Igor Corona
  */
 @Entity
-@Table(name = "Empresa")
+@Table(name = "empresa")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Empresa.findAll", query = "SELECT e FROM Empresa e")
     , @NamedQuery(name = "Empresa.findByIdEmpresa", query = "SELECT e FROM Empresa e WHERE e.idEmpresa = :idEmpresa")
-    , @NamedQuery(name = "Empresa.findByCodigo", query = "SELECT e FROM Empresa e WHERE e.codigo = :codigo")
     , @NamedQuery(name = "Empresa.findByFantasia", query = "SELECT e FROM Empresa e WHERE e.fantasia = :fantasia")
     , @NamedQuery(name = "Empresa.findByRazaoSocial", query = "SELECT e FROM Empresa e WHERE e.razaoSocial = :razaoSocial")
     , @NamedQuery(name = "Empresa.findByCpfcnpj", query = "SELECT e FROM Empresa e WHERE e.cpfcnpj = :cpfcnpj")})
@@ -39,8 +38,6 @@ public class Empresa implements Serializable {
     @Basic(optional = false)
     @Column(name = "idEmpresa")
     private Integer idEmpresa;
-    @Column(name = "codigo")
-    private String codigo;
     @Column(name = "fantasia")
     private String fantasia;
     @Column(name = "razaoSocial")
@@ -61,14 +58,6 @@ public class Empresa implements Serializable {
 
     public void setIdEmpresa(Integer idEmpresa) {
         this.idEmpresa = idEmpresa;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getFantasia() {

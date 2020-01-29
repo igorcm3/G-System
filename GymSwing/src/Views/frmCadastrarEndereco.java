@@ -7,7 +7,7 @@ package Views;
 
 import DAO.EnderecoDAO;
 import Models.Aluno;
-import Models.Endereco;
+import Models.Enderecos;
 import javax.swing.JOptionPane;
 import Uteis.Funcoes;
 
@@ -18,7 +18,7 @@ import Uteis.Funcoes;
 public class frmCadastrarEndereco extends javax.swing.JDialog {
     protected frmAluno frameAluno;
     private boolean novoEndereco;
-    private Endereco enderecoEdicao;
+    private Enderecos enderecoEdicao;
     /**
      * Creates new form frmCadastrarEndereco
      */
@@ -29,7 +29,7 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
         this.frameAluno = framAluno;   
         this.novoEndereco = true;
     }
-    public frmCadastrarEndereco(boolean modal, frmAluno framAluno, Endereco enderecoEdicao) {
+    public frmCadastrarEndereco(boolean modal, frmAluno framAluno, Enderecos enderecoEdicao) {
         setModal(modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -72,8 +72,10 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de endereço");
+        setPreferredSize(new java.awt.Dimension(790, 490));
 
         painelEndereço.setBackground(new java.awt.Color(255, 255, 255));
+        painelEndereço.setPreferredSize(new java.awt.Dimension(790, 490));
 
         txtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -134,35 +136,34 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(painelEndereçoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(painelEndereçoLayout.createSequentialGroup()
-                                .addGroup(painelEndereçoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(297, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelEndereçoLayout.createSequentialGroup()
+                                .addGroup(painelEndereçoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(painelEndereçoLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(btnCancelar))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelEndereçoLayout.createSequentialGroup()
                                         .addComponent(txtReferencia)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel4)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtComplemento, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(painelEndereçoLayout.createSequentialGroup()
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, painelEndereçoLayout.createSequentialGroup()
                                         .addComponent(txtEndereco)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jLabel2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(txtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(29, 29, 29))
-                            .addGroup(painelEndereçoLayout.createSequentialGroup()
-                                .addGroup(painelEndereçoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnCancelar)
-                                    .addGroup(painelEndereçoLayout.createSequentialGroup()
-                                        .addComponent(txtCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(149, 149, 149)))
-                                .addContainerGap(30, Short.MAX_VALUE))))))
+                                .addGap(29, 29, 29))))))
         );
         painelEndereçoLayout.setVerticalGroup(
             painelEndereçoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -188,7 +189,7 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
                     .addComponent(txtUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 326, Short.MAX_VALUE)
                 .addGroup(painelEndereçoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar)
                     .addComponent(btnCancelar))
@@ -205,9 +206,7 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(painelEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(painelEndereço, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -221,7 +220,7 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         // TODO add your handling code here:
         EnderecoDAO edDAO = new EnderecoDAO();
-        if (novoEndereco) { enderecoEdicao = new Endereco();}
+        if (novoEndereco) { enderecoEdicao = new Enderecos();}
         enderecoEdicao.setEndereco(txtEndereco.getText());
         enderecoEdicao.setNumero(txtNumero.getText());
         enderecoEdicao.setComplemento(txtComplemento.getText());

@@ -156,7 +156,6 @@ public class frmCadastrarPersonal extends javax.swing.JDialog {
 
         p.setNome(txtNome.getText());
         p.setRgcpf(txtCPF.getText());
-        p.setCref(txtCREF.getText());
         p.setDescricao(txtDescricao.getText());
         
         pDAO.merge(p);
