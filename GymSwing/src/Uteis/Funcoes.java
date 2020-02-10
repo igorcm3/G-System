@@ -14,6 +14,8 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author coron
  */
 public class Funcoes {
+    private static Object[] optionOk = {"Ok"};    
+    private static Object[] optionSimNao = {"Sim", "Não"}; 
 
     public Funcoes() {
     }
@@ -45,10 +47,15 @@ public class Funcoes {
         return i;
     }
 
-    public static void MsgSimples(String msg, String titulo ) {
+    public static void MsgWarningSimples(String msg, String titulo ) {
         // usar constantes para implementar msgs
         JOptionPane.showMessageDialog(null, msg, titulo, 1);
     }
+    
+    public static int MsgConfirmaçãoOk(String msg, String titulo ) {
+        // usar constantes para implementar msgs
+        return JOptionPane.showOptionDialog(null, msg, titulo, JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, optionOk ,optionOk[0]);
+    }    
     
     public static void setLookAndFellSistema() {
         try {
@@ -63,6 +70,6 @@ public class Funcoes {
         } catch (ClassNotFoundException ex) {
             ex.printStackTrace();
         }
-    }    
+    } 
 
 }

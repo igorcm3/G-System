@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Personal.findAll", query = "SELECT p FROM Personal p")
     , @NamedQuery(name = "Personal.findByIdPersonal", query = "SELECT p FROM Personal p WHERE p.idPersonal = :idPersonal")
-    , @NamedQuery(name = "Personal.findByCodigo", query = "SELECT p FROM Personal p WHERE p.codigo = :codigo")
     , @NamedQuery(name = "Personal.findByNome", query = "SELECT p FROM Personal p WHERE p.nome = :nome")
     , @NamedQuery(name = "Personal.findByRgcpf", query = "SELECT p FROM Personal p WHERE p.rgcpf = :rgcpf")
     , @NamedQuery(name = "Personal.findByDescricao", query = "SELECT p FROM Personal p WHERE p.descricao = :descricao")})
@@ -42,8 +41,6 @@ public class Personal implements Serializable {
     @Basic(optional = false)
     @Column(name = "idPersonal")
     private Integer idPersonal;
-    @Column(name = "codigo")
-    private String codigo;
     @Column(name = "nome")
     private String nome;
     @Column(name = "rgcpf")
@@ -66,14 +63,6 @@ public class Personal implements Serializable {
 
     public void setIdPersonal(Integer idPersonal) {
         this.idPersonal = idPersonal;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -131,7 +120,7 @@ public class Personal implements Serializable {
 
     @Override
     public String toString() {
-        return nome;
+        return "Models.Personal[ idPersonal=" + idPersonal + " ]";
     }
     
 }

@@ -34,7 +34,6 @@ create table Enderecos (
 
 create table Personal (
 	idPersonal int not null auto_increment ,
-    codigo varchar(6),
 	nome varchar(50),
     rgcpf varchar(11),
     descricao varchar(500),
@@ -43,7 +42,6 @@ create table Personal (
 
 create table Treino (
 	idTreino int not null auto_increment,
-    codigo varchar(3),
     descricao varchar(200),
     nome varchar(50),
     diasSemana varchar(50),
@@ -53,10 +51,7 @@ create table Treino (
 
 create table Mensalidade (
 	idMensalidade int not null auto_increment,
-    pago boolean,
-    codigo varchar(3),
     valor float,
-    dataPagamento date,
     idTreino int,
     primary key (idMensalidade),
     foreign key  (idTreino) references Treino (idTreino) 
@@ -64,14 +59,13 @@ create table Mensalidade (
 
 create table Aluno (
 	idAluno int not null auto_increment,
-    codigo varchar (5),
     nome varchar (50),
     celular varchar (11),
     sexo char (1),
     rgcpf varchar (11),
     idEndereco int,
     idPersonal int,
-    idMensalidade int not null,
+    idMensalidade int,
     primary key (idAluno),
     foreign key (idEndereco) references Enderecos (idEndereco),
     foreign key (idPersonal) references Personal (idPersonal),
@@ -95,8 +89,23 @@ create table Medidas (
 	foreign key  (idAluno) references Aluno (idAluno)  
 );
 
+create table Receber (
+	idReceber int not null auto_increment,
+    pago boolean,
+    dataPagamento date, 
+    idAluno int not null,
+    primary key (idReceber),
+    foreign key  (idAluno) references Aluno (idAluno)  
+);
+
 insert into empresa values(1,'Academia Body Master', 'Vagner Vanchett', '0000000') ;
-insert into Aluno values (0, '0001', 'Gabriela Rhoden', '9999999', 'F', '05805805805', 1, null, null, 1);
+insert into Aluno values (0, 'Gabriela Rhoden', '9999999', 'F', '05805805805', 1, null , 1);
+
+
+
+
+select * from aluno;
+select * from mensalidade;
 
 
     

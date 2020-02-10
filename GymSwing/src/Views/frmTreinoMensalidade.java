@@ -4,6 +4,8 @@ import DAO.MensalidadeDAO;
 import DAO.TreinoDAO;
 import Models.Mensalidade;
 import Models.Treino;
+import Uteis.Funcoes;
+import Uteis.FuncoesBD;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
@@ -18,7 +20,7 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
     protected Treino treino;
     protected Mensalidade mensalidade;
     protected frmAluno frameAluno;
-    protected SimpleDateFormat formatarData;
+//    protected SimpleDateFormat formatarData;
 
     public frmTreinoMensalidade(boolean modal, frmAluno framAluno) {
         this.setModal(modal);
@@ -28,15 +30,15 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         carregarTreinoMensalidade();
         carregarTreinos();
         mensalidade = new Mensalidade();
-        formatarData = new SimpleDateFormat("dd-MM-yyyy");
-        jCalendar.addPropertyChangeListener(
-            new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent e) {
-                atualizaData();
-            }
-        });
-        jCalendar.getCalendar().setTime(new Date());
+//        formatarData = new SimpleDateFormat("dd-MM-yyyy");
+//        jCalendar.addPropertyChangeListener(
+//            new PropertyChangeListener() {
+//            @Override
+//            public void propertyChange(PropertyChangeEvent e) {
+//                atualizaData();
+//            }
+//        });
+//        jCalendar.getCalendar().setTime(new Date());
     }
 
     public void carregarTreinos() {
@@ -55,24 +57,18 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
     }
 
     private void habilitaMensalidade(boolean hab) {
-        txtValor.setEnabled(hab);
-        cbStatus.setEnabled(hab);
         btnSalvar.setEnabled(hab);
-        if (hab) {
-            // Data formatada
-            txtDataFormatada.setText(formatarData.format(jCalendar.getCalendar().getTime()));
-        }
     }
 
     private void PreencherLabelsTreino() {
         if (treino.equals(null)) {
 
         }
-        lblInfoTreino.setText("Treino: " + treino.toString());
+        lblTreino.setText("Treino: " + treino.toString());
         if (rbUsaPersonalSim.isSelected()) {
-            lblInfoTreino2.setText("Utiliza personal: Sim");
+            lblUtilizaPersonal.setText("Utiliza personal: Sim");
         } else {
-            lblInfoTreino2.setText("Utiliza personal: Não");
+            lblUtilizaPersonal.setText("Utiliza personal: Não");
         }
     }
 
@@ -80,13 +76,13 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         TreinoDAO pDAO = new TreinoDAO();
         treino = (Treino) cbTreinos.getSelectedItem();
     }
-
-    private void atualizaData() {
-        if (jCalendar.getCalendar().getTime() == null) {
-            System.exit(0);
-        }
-        txtDataFormatada.setText(formatarData.format(jCalendar.getCalendar().getTime()));
-    }
+//
+//    private void atualizaData() {
+//        if (jCalendar.getCalendar().getTime() == null) {
+//            System.exit(0);
+//        }
+//        txtDataFormatada.setText(formatarData.format(jCalendar.getCalendar().getTime()));
+//    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -94,35 +90,28 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
         painelFundo = new javax.swing.JPanel();
         painelTreino = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         btnConfirmarTreinmo = new javax.swing.JButton();
         painelPossuiPersonal = new javax.swing.JPanel();
         rbUsaPersonalSim = new javax.swing.JRadioButton();
         rbUsaPersonalNao = new javax.swing.JRadioButton();
         painelTreinos = new javax.swing.JPanel();
         cbTreinos = new javax.swing.JComboBox<>();
-        btnNovoTreino = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        painelResumoTreino = new javax.swing.JPanel();
-        lblInfoTreino = new javax.swing.JLabel();
-        lblInfoTreino2 = new javax.swing.JLabel();
-        painelMensalidade = new javax.swing.JPanel();
-        txtValor = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        cbStatus = new javax.swing.JComboBox<>();
-        jCalendar = new com.toedter.calendar.JCalendar();
-        txtDataFormatada = new javax.swing.JFormattedTextField();
+        txtValor = new javax.swing.JTextField();
         btnSalvar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        lblMensalidade = new javax.swing.JLabel();
-        lblTreino = new javax.swing.JLabel();
+        Treino = new javax.swing.JLabel();
         sep = new javax.swing.JSeparator();
+        painelResumoTreino = new javax.swing.JPanel();
+        lblTreino = new javax.swing.JLabel();
+        lblUtilizaPersonal = new javax.swing.JLabel();
+        lblTreinoDiasSemana = new javax.swing.JLabel();
+        lblValorTreino = new javax.swing.JLabel();
+        lblMensalidade1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Treino e mensalidade");
-        setPreferredSize(new java.awt.Dimension(790, 490));
         setResizable(false);
 
         painelFundo.setBackground(new java.awt.Color(255, 255, 255));
@@ -130,9 +119,6 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
         painelTreino.setBackground(new java.awt.Color(255, 255, 255));
         painelTreino.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true));
-
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 10)); // NOI18N
-        jLabel4.setText("*Após selecionar o treino, clique em \"Confirmar\" para gerar a mensalidade");
 
         btnConfirmarTreinmo.setText("Confirmar");
         btnConfirmarTreinmo.addActionListener(new java.awt.event.ActionListener() {
@@ -167,19 +153,19 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
             painelPossuiPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPossuiPersonalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelPossuiPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(rbUsaPersonalSim, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                    .addComponent(rbUsaPersonalNao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(painelPossuiPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbUsaPersonalNao, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rbUsaPersonalSim, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
         painelPossuiPersonalLayout.setVerticalGroup(
             painelPossuiPersonalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelPossuiPersonalLayout.createSequentialGroup()
-                .addGap(8, 8, 8)
+                .addContainerGap(21, Short.MAX_VALUE)
                 .addComponent(rbUsaPersonalSim)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(rbUsaPersonalNao)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(24, 24, 24))
         );
 
         painelTreinos.setBackground(new java.awt.Color(255, 255, 255));
@@ -187,89 +173,71 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
         cbTreinos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
 
-        btnNovoTreino.setText("+");
-        btnNovoTreino.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNovoTreinoActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setText("Cadastrar treino");
-
         javax.swing.GroupLayout painelTreinosLayout = new javax.swing.GroupLayout(painelTreinos);
         painelTreinos.setLayout(painelTreinosLayout);
         painelTreinosLayout.setHorizontalGroup(
             painelTreinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelTreinosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelTreinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(painelTreinosLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnNovoTreino)))
-                .addContainerGap())
+                .addComponent(cbTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         painelTreinosLayout.setVerticalGroup(
             painelTreinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelTreinosLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(44, 44, 44)
                 .addComponent(cbTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(painelTreinosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNovoTreino)
-                    .addComponent(jLabel5))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        painelResumoTreino.setBackground(new java.awt.Color(252, 248, 248));
-        painelResumoTreino.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true), "Resumo do treino", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial", 0, 11))); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(11, 8, 123), 2), "Informe o valor da mensalidade"));
 
-        lblInfoTreino.setText("Treino: ");
-        lblInfoTreino.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        jLabel1.setText("Valor");
 
-        lblInfoTreino2.setText("Utiliza personal:");
+        txtValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtValorActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout painelResumoTreinoLayout = new javax.swing.GroupLayout(painelResumoTreino);
-        painelResumoTreino.setLayout(painelResumoTreinoLayout);
-        painelResumoTreinoLayout.setHorizontalGroup(
-            painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelResumoTreinoLayout.createSequentialGroup()
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblInfoTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblInfoTreino2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        painelResumoTreinoLayout.setVerticalGroup(
-            painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelResumoTreinoLayout.createSequentialGroup()
-                .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(lblInfoTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblInfoTreino2)
-                .addGap(41, 41, 41))
+                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71))
         );
 
         javax.swing.GroupLayout painelTreinoLayout = new javax.swing.GroupLayout(painelTreino);
         painelTreino.setLayout(painelTreinoLayout);
         painelTreinoLayout.setHorizontalGroup(
             painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelTreinoLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelTreinoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(painelTreinoLayout.createSequentialGroup()
-                        .addGroup(painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(painelResumoTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(painelTreinoLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnConfirmarTreinmo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(painelTreinoLayout.createSequentialGroup()
-                                .addComponent(painelPossuiPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(painelTreinos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                        .addComponent(painelPossuiPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(painelTreinos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(painelTreinoLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnConfirmarTreinmo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35))
         );
         painelTreinoLayout.setVerticalGroup(
             painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,75 +246,11 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 .addGroup(painelTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(painelPossuiPersonal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(painelTreinos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(painelResumoTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel4)
-                .addGap(20, 20, 20)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(btnConfirmarTreinmo)
-                .addContainerGap())
-        );
-
-        painelMensalidade.setBackground(new java.awt.Color(255, 255, 255));
-        painelMensalidade.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true));
-
-        txtValor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtValorActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Valor");
-
-        jLabel2.setText("Status");
-
-        jLabel3.setText("Data pagamento");
-
-        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pago", "Não pago" }));
-
-        jCalendar.setBackground(new java.awt.Color(242, 242, 242));
-        jCalendar.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-
-        javax.swing.GroupLayout painelMensalidadeLayout = new javax.swing.GroupLayout(painelMensalidade);
-        painelMensalidade.setLayout(painelMensalidadeLayout);
-        painelMensalidadeLayout.setHorizontalGroup(
-            painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelMensalidadeLayout.createSequentialGroup()
-                .addGap(44, 44, 44)
-                .addGroup(painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jCalendar, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                    .addGroup(painelMensalidadeLayout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtValor))
-                    .addGroup(painelMensalidadeLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtDataFormatada))
-                    .addGroup(painelMensalidadeLayout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbStatus, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(51, 51, 51))
-        );
-        painelMensalidadeLayout.setVerticalGroup(
-            painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(painelMensalidadeLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(painelMensalidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtDataFormatada, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(18, 18, 18)
-                .addComponent(jCalendar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
 
         btnSalvar.setText("Salvar");
@@ -363,16 +267,56 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
             }
         });
 
-        lblMensalidade.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblMensalidade.setForeground(new java.awt.Color(1, 12, 119));
-        lblMensalidade.setText("Mensalidade");
-
-        lblTreino.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        lblTreino.setForeground(new java.awt.Color(1, 12, 119));
-        lblTreino.setText("Treino");
+        Treino.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        Treino.setForeground(new java.awt.Color(1, 12, 119));
+        Treino.setText("Treino");
 
         sep.setForeground(new java.awt.Color(83, 83, 84));
         sep.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        painelResumoTreino.setBackground(new java.awt.Color(252, 248, 248));
+        painelResumoTreino.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(11, 8, 123), 2, true));
+
+        lblTreino.setText("Treino:");
+        lblTreino.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        lblUtilizaPersonal.setText("Utiliza personal:");
+
+        lblTreinoDiasSemana.setText("Dias semana:");
+        lblTreinoDiasSemana.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        lblValorTreino.setText("Valor a ser pago mensalmente: ");
+
+        javax.swing.GroupLayout painelResumoTreinoLayout = new javax.swing.GroupLayout(painelResumoTreino);
+        painelResumoTreino.setLayout(painelResumoTreinoLayout);
+        painelResumoTreinoLayout.setHorizontalGroup(
+            painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelResumoTreinoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUtilizaPersonal, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTreinoDiasSemana, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblValorTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(89, Short.MAX_VALUE))
+        );
+        painelResumoTreinoLayout.setVerticalGroup(
+            painelResumoTreinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(painelResumoTreinoLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(lblTreino)
+                .addGap(18, 18, 18)
+                .addComponent(lblTreinoDiasSemana)
+                .addGap(18, 18, 18)
+                .addComponent(lblUtilizaPersonal)
+                .addGap(18, 18, 18)
+                .addComponent(lblValorTreino)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        lblMensalidade1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblMensalidade1.setForeground(new java.awt.Color(1, 12, 119));
+        lblMensalidade1.setText("Resumo da Mensalidade");
 
         javax.swing.GroupLayout painelFundoLayout = new javax.swing.GroupLayout(painelFundo);
         painelFundo.setLayout(painelFundoLayout);
@@ -380,39 +324,38 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
             painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFundoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(painelFundoLayout.createSequentialGroup()
+                .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, painelFundoLayout.createSequentialGroup()
                         .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton2))
                     .addGroup(painelFundoLayout.createSequentialGroup()
                         .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Treino, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(painelFundoLayout.createSequentialGroup()
-                                .addComponent(painelTreino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(sep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(painelFundoLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(lblMensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(painelFundoLayout.createSequentialGroup()
+                                .addComponent(painelTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(painelMensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(sep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(painelResumoTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(painelFundoLayout.createSequentialGroup()
+                                .addComponent(lblMensalidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         painelFundoLayout.setVerticalGroup(
             painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelFundoLayout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMensalidade, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTreino, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Treino, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMensalidade1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(painelTreino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(painelMensalidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(sep))
+                    .addComponent(sep)
+                    .addComponent(painelResumoTreino, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
@@ -424,11 +367,13 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(painelFundo, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(painelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(painelFundo, javax.swing.GroupLayout.DEFAULT_SIZE, 496, Short.MAX_VALUE)
         );
 
         pack();
@@ -437,12 +382,6 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
     private void txtValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtValorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtValorActionPerformed
-
-    private void btnNovoTreinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoTreinoActionPerformed
-        // TODO add your handling code here:
-        frmTreino frmtreino = new frmTreino(true);
-        frmtreino.setVisible(true);
-    }//GEN-LAST:event_btnNovoTreinoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -486,14 +425,17 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Informe o valor para a mensalidade!", "Mensalidade", 1);  
             }else {
             mensalidade.setIdTreino(treino);
-            mensalidade.setPago(cbStatus.getSelectedIndex() == 0);
+            //mensalidade.setPago(cbStatus.getSelectedIndex() == 0);
             mensalidade.setValor(Float.parseFloat(txtValor.getText()));
-            mensalidade.setDataPagamento(new Date());
+            //mensalidade.setDataPagamento(new Date());
             MensalidadeDAO mDAO = new MensalidadeDAO();
             mDAO.persist(mensalidade);
             frameAluno.setMensalidade(mensalidade);
             frameAluno.atualizarMensalidade();
-            JOptionPane.showMessageDialog(null, "Mensalidade gerada com suceso!", "Mensalidade", 1);
+            int resultMenssage = Funcoes.MsgConfirmaçãoOk("Mensalidade gerada com suceso!", "Mensalidade");
+            if (resultMenssage >= 0) {
+                this.dispose();
+            }            
             }
         }
 
@@ -501,24 +443,19 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Treino;
     private javax.swing.JButton btnConfirmarTreinmo;
-    private javax.swing.JButton btnNovoTreino;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JComboBox<String> cbTreinos;
     private javax.swing.JButton jButton2;
-    private com.toedter.calendar.JCalendar jCalendar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel lblInfoTreino;
-    private javax.swing.JLabel lblInfoTreino2;
-    private javax.swing.JLabel lblMensalidade;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblMensalidade1;
     private javax.swing.JLabel lblTreino;
+    private javax.swing.JLabel lblTreinoDiasSemana;
+    private javax.swing.JLabel lblUtilizaPersonal;
+    private javax.swing.JLabel lblValorTreino;
     private javax.swing.JPanel painelFundo;
-    private javax.swing.JPanel painelMensalidade;
     private javax.swing.JPanel painelPossuiPersonal;
     private javax.swing.JPanel painelResumoTreino;
     private javax.swing.JPanel painelTreino;
@@ -526,7 +463,6 @@ public class frmTreinoMensalidade extends javax.swing.JDialog {
     private javax.swing.JRadioButton rbUsaPersonalNao;
     private javax.swing.JRadioButton rbUsaPersonalSim;
     private javax.swing.JSeparator sep;
-    private javax.swing.JFormattedTextField txtDataFormatada;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,7 +30,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Treino.findAll", query = "SELECT t FROM Treino t")
     , @NamedQuery(name = "Treino.findByIdTreino", query = "SELECT t FROM Treino t WHERE t.idTreino = :idTreino")
-    , @NamedQuery(name = "Treino.findByCodigo", query = "SELECT t FROM Treino t WHERE t.codigo = :codigo")
     , @NamedQuery(name = "Treino.findByDescricao", query = "SELECT t FROM Treino t WHERE t.descricao = :descricao")
     , @NamedQuery(name = "Treino.findByNome", query = "SELECT t FROM Treino t WHERE t.nome = :nome")
     , @NamedQuery(name = "Treino.findByDiasSemana", query = "SELECT t FROM Treino t WHERE t.diasSemana = :diasSemana")
@@ -43,8 +42,6 @@ public class Treino implements Serializable {
     @Basic(optional = false)
     @Column(name = "idTreino")
     private Integer idTreino;
-    @Column(name = "codigo")
-    private String codigo;
     @Column(name = "descricao")
     private String descricao;
     @Column(name = "nome")
@@ -69,14 +66,6 @@ public class Treino implements Serializable {
 
     public void setIdTreino(Integer idTreino) {
         this.idTreino = idTreino;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getDescricao() {
@@ -142,7 +131,7 @@ public class Treino implements Serializable {
 
     @Override
     public String toString() {
-        return nome +" - "+ descricao + " - " + quantidadeSemana + "X na semana.";
+        return "Models.Treino[ idTreino=" + idTreino + " ]";
     }
     
 }

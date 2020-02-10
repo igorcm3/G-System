@@ -7,9 +7,7 @@ package Models;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -36,10 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Mensalidade.findAll", query = "SELECT m FROM Mensalidade m")
     , @NamedQuery(name = "Mensalidade.findByIdMensalidade", query = "SELECT m FROM Mensalidade m WHERE m.idMensalidade = :idMensalidade")
-    , @NamedQuery(name = "Mensalidade.findByPago", query = "SELECT m FROM Mensalidade m WHERE m.pago = :pago")
-    , @NamedQuery(name = "Mensalidade.findByCodigo", query = "SELECT m FROM Mensalidade m WHERE m.codigo = :codigo")
-    , @NamedQuery(name = "Mensalidade.findByValor", query = "SELECT m FROM Mensalidade m WHERE m.valor = :valor")
-    , @NamedQuery(name = "Mensalidade.findByDataPagamento", query = "SELECT m FROM Mensalidade m WHERE m.dataPagamento = :dataPagamento")})
+    , @NamedQuery(name = "Mensalidade.findByValor", query = "SELECT m FROM Mensalidade m WHERE m.valor = :valor")})
 public class Mensalidade implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -48,17 +41,10 @@ public class Mensalidade implements Serializable {
     @Basic(optional = false)
     @Column(name = "idMensalidade")
     private Integer idMensalidade;
-    @Column(name = "pago")
-    private Boolean pago;
-    @Column(name = "codigo")
-    private String codigo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private Float valor;
-    @Column(name = "dataPagamento")
-    @Temporal(TemporalType.DATE)
-    private Date dataPagamento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMensalidade")
+    @OneToMany(mappedBy = "idMensalidade")
     private Collection<Aluno> alunoCollection;
     @JoinColumn(name = "idTreino", referencedColumnName = "idTreino")
     @ManyToOne
@@ -79,36 +65,12 @@ public class Mensalidade implements Serializable {
         this.idMensalidade = idMensalidade;
     }
 
-    public Boolean getPago() {
-        return pago;
-    }
-
-    public void setPago(Boolean pago) {
-        this.pago = pago;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public Float getValor() {
         return valor;
     }
 
     public void setValor(Float valor) {
         this.valor = valor;
-    }
-
-    public Date getDataPagamento() {
-        return dataPagamento;
-    }
-
-    public void setDataPagamento(Date dataPagamento) {
-        this.dataPagamento = dataPagamento;
     }
 
     @XmlTransient

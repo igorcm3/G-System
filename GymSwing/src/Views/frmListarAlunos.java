@@ -2,12 +2,14 @@ package Views;
 
 import DAO.AlunoDAO;
 import Models.Aluno;
+import Models.Receber;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 
 public class frmListarAlunos extends javax.swing.JDialog {
+
     private ImageIcon imgAlu;
     private DefaultTableModel dtm;
 
@@ -15,7 +17,7 @@ public class frmListarAlunos extends javax.swing.JDialog {
         setModal(modal);
         initComponents();
         setLocationRelativeTo(null);
-        atualizaTabela();       
+        atualizaTabela();
     }
 
     // metodos
@@ -23,14 +25,14 @@ public class frmListarAlunos extends javax.swing.JDialog {
         dtm = (DefaultTableModel) tableAlunos.getModel();
         AlunoDAO alunoDao = new AlunoDAO();
         try {
-            List<Aluno> listaAluno = alunoDao.listarAlunos();    
+            List<Aluno> listaAluno = alunoDao.listarAlunos();
             for (Aluno aluno : listaAluno) {
                 //string nome, string treino, string personal, float valor, pago string
                 dtm.insertRow(dtm.getRowCount(), new Object[]{retornaAlunoNome(aluno.getNome()),
                     retornaTreino(aluno),
                     retornaPersonal(aluno),
                     retornaMensalidade(aluno.getIdMensalidade().getValor()),
-                    retornaAlunoPago(aluno.getIdMensalidade().getPago())
+                    retornaAlunoPago(alunoDao.getUltimoReceberAluno(aluno.getIdAluno()))
                 }); // refatorar! utilizaR METODO NA CLASSE Funcoes que retorna o array de object, ja formatado, levar todas as funcoes de "retorna" para la 
             }
         } catch (Exception e) {
@@ -38,11 +40,15 @@ public class frmListarAlunos extends javax.swing.JDialog {
         }
     }
 
-    public String retornaAlunoPago(Boolean pago) {
-        if (pago) {
-            return "Sim";
-        } else {
+    public String retornaAlunoPago(Receber r) {
+        if (r == null) {
             return "Não";
+        } else {
+            if (r.getPago()) {
+                return "Sim";
+            } else {
+                return "Não";
+            }
         }
     }
 
@@ -282,7 +288,7 @@ public class frmListarAlunos extends javax.swing.JDialog {
         imgAlu = new ImageIcon("src\\Imagens\\add_60.png");
         lblBtnAdd.setIcon(imgAlu);
         frmAluno telaAluno = new frmAluno(true, true);
-        telaAluno.setVisible(true);        
+        telaAluno.setVisible(true);
     }//GEN-LAST:event_lblBtnAddMouseReleased
 
     private void lblBtnRemoverMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnRemoverMousePressed

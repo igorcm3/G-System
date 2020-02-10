@@ -6,6 +6,7 @@
 package DAO;
 
 import Models.Aluno;
+import Models.Receber;
 import Persistencia.HibernateUtil;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -47,7 +48,6 @@ public class AlunoDAO {
         em.getTransaction().commit();
     }
 
-   
     public List<Aluno> listarAlunos() {
         List<Aluno> lista = null;
         lista = em.createQuery("from Aluno u ").getResultList();
@@ -64,6 +64,15 @@ public class AlunoDAO {
             return "1"; // Caso não tenha nenhum aluno cadastrado
         } else {
             return em.createQuery("select max(u.codigo) from Aluno u").getSingleResult().toString();
+        }
+    }
+
+    public Receber getUltimoReceberAluno(int id) {
+        try {
+            Receber r = (Receber) em.createQuery("select max(u.idReceber) from Receber u where idAluno = " + String.valueOf(id) + "").getSingleResult();
+            return r;
+        } catch (Exception e) {
+            return null;
         }
     }
 

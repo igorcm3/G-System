@@ -6,9 +6,7 @@
 package Views;
 
 import DAO.EnderecoDAO;
-import Models.Aluno;
 import Models.Enderecos;
-import javax.swing.JOptionPane;
 import Uteis.Funcoes;
 
 /**
@@ -72,7 +70,6 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de endereço");
-        setPreferredSize(new java.awt.Dimension(790, 490));
 
         painelEndereço.setBackground(new java.awt.Color(255, 255, 255));
         painelEndereço.setPreferredSize(new java.awt.Dimension(790, 490));
@@ -236,9 +233,12 @@ public class frmCadastrarEndereco extends javax.swing.JDialog {
         frameAluno.setEndereco(enderecoEdicao);
         boolean result = frameAluno.atualizarEnderecoAluno();
         if (result) {
-            JOptionPane.showMessageDialog(null, "Endereço salvo com sucesso!", "Endereço", 1);    
+            int resultMenssage = Funcoes.MsgConfirmaçãoOk("Endereço salvo com sucesso!", "Endereço");
+            if (resultMenssage >= 0) {
+                this.dispose();
+            }
         }else{
-            JOptionPane.showMessageDialog(null, "Erro ao cadastrar\\salvar endereço!", "Endereço", 1);    
+            Funcoes.MsgWarningSimples("Endereço salvo com sucesso!", "Endereço");
         }
             
         

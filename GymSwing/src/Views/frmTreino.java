@@ -7,6 +7,7 @@ package Views;
 
 import DAO.TreinoDAO;
 import Models.Treino;
+import Uteis.Funcoes;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,15 +21,7 @@ public class frmTreino extends javax.swing.JDialog {
         setModal(modal);
         initComponents();
         setLocationRelativeTo(null);
-        carregarCodigo();
-    }
-    
-    
-    public void carregarCodigo(){
-    
-    
-    }
-            
+    }        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -151,12 +144,14 @@ public class frmTreino extends javax.swing.JDialog {
         treino.setDiasSemana(txtDiasSemana.getText());
         treino.setDescricao(txtDescricao.getText());
         if (treino.equals(null)) {
-             JOptionPane.showMessageDialog(null, "Erro ao cadastrar treino!", "Treino", 1);  
+             Funcoes.MsgWarningSimples("Erro ao cadastrar treino!", "Treino");  
              System.exit(0);
         }
         treinoDAO.merge(treino);
-        JOptionPane.showMessageDialog(null, "Treino cadastrado com sucesso!", "Treino", 1);
-        
+            int resultMenssage = Funcoes.MsgConfirmaçãoOk("Treino cadastrado com suceso!", "Treino");
+            if (resultMenssage >= 0) {
+                this.dispose();
+            }      
     }//GEN-LAST:event_btnSalvarActionPerformed
 
 

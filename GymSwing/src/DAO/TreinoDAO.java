@@ -62,9 +62,5 @@ public class TreinoDAO {
             return null;
         }
     }
-    
-    public String getUltimoCodigo(){
-        Treino treino = (Treino) em.createQuery("from Treino u order by desc").getSingleResult();
-        return treino.getCodigo();
-    }
+
 }

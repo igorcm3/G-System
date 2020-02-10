@@ -10,6 +10,7 @@
     <class>Models.Empresa</class>
     <class>Models.Endereco</class>
     <class>Models.Enderecos</class>
+    <class>Models.Receber</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gym?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

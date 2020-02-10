@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Aluno.findAll", query = "SELECT a FROM Aluno a")
     , @NamedQuery(name = "Aluno.findByIdAluno", query = "SELECT a FROM Aluno a WHERE a.idAluno = :idAluno")
-    , @NamedQuery(name = "Aluno.findByCodigo", query = "SELECT a FROM Aluno a WHERE a.codigo = :codigo")
     , @NamedQuery(name = "Aluno.findByNome", query = "SELECT a FROM Aluno a WHERE a.nome = :nome")
     , @NamedQuery(name = "Aluno.findByCelular", query = "SELECT a FROM Aluno a WHERE a.celular = :celular")
     , @NamedQuery(name = "Aluno.findBySexo", query = "SELECT a FROM Aluno a WHERE a.sexo = :sexo")
@@ -46,8 +45,6 @@ public class Aluno implements Serializable {
     @Basic(optional = false)
     @Column(name = "idAluno")
     private Integer idAluno;
-    @Column(name = "codigo")
-    private String codigo;
     @Column(name = "nome")
     private String nome;
     @Column(name = "celular")
@@ -63,8 +60,10 @@ public class Aluno implements Serializable {
     @ManyToOne
     private Personal idPersonal;
     @JoinColumn(name = "idMensalidade", referencedColumnName = "idMensalidade")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Mensalidade idMensalidade;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
+    private Collection<Receber> receberCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idAluno")
     private Collection<Medidas> medidasCollection;
 
@@ -81,14 +80,6 @@ public class Aluno implements Serializable {
 
     public void setIdAluno(Integer idAluno) {
         this.idAluno = idAluno;
-    }
-
-    public String getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public String getNome() {
@@ -145,6 +136,15 @@ public class Aluno implements Serializable {
 
     public void setIdMensalidade(Mensalidade idMensalidade) {
         this.idMensalidade = idMensalidade;
+    }
+
+    @XmlTransient
+    public Collection<Receber> getReceberCollection() {
+        return receberCollection;
+    }
+
+    public void setReceberCollection(Collection<Receber> receberCollection) {
+        this.receberCollection = receberCollection;
     }
 
     @XmlTransient
