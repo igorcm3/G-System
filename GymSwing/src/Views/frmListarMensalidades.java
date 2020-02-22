@@ -19,12 +19,27 @@ public class frmListarMensalidades extends javax.swing.JDialog {
     protected frmAluno frameAluno;
     private DefaultListModel listaMensalidades = new DefaultListModel();
     protected Mensalidade mensalidade;
+    protected boolean origemAluno;
 
-    public frmListarMensalidades(boolean modal, frmAluno framAluno) {
-        setModal(modal);
+    public frmListarMensalidades(frmAluno framAluno) {
+        iniciarTela();
+        this.frameAluno = framAluno;
+        origemAluno = true;
+        btnConfirmar.setVisible(true);
+        btnSair.setVisible(true);
+    }
+
+    public frmListarMensalidades() {
+        iniciarTela();
+        origemAluno = false;
+        btnConfirmar.setVisible(false);
+        btnSair.setVisible(false);
+    }
+
+    public void iniciarTela() {
+        setModal(true);
         initComponents();
         setLocationRelativeTo(null);
-        this.frameAluno = framAluno;
         carregarMensalidades();
     }
 
@@ -41,7 +56,7 @@ public class frmListarMensalidades extends javax.swing.JDialog {
                 if (!evt.getValueIsAdjusting()) {
                     System.out.println("Index lista -> " + jListMensalidades.getSelectedIndex());
                     mensalidade = (Mensalidade) listaMensalidades.getElementAt(jListMensalidades.getSelectedIndex());
-                    atualizaLabelsInfo(!jListMensalidades.isSelectionEmpty()); 
+                    atualizaLabelsInfo(!jListMensalidades.isSelectionEmpty());
                 }
             }
         });
@@ -53,11 +68,11 @@ public class frmListarMensalidades extends javax.swing.JDialog {
         lblTreino.setVisible(HaIndexSelecionado);
         lblValor.setVisible(HaIndexSelecionado);
         lblDiasSemana.setVisible(!HaIndexSelecionado);
-        if ((HaIndexSelecionado)&&(!mensalidade.equals(null))) {
-            lblMensalidade.setText("Mensalidade: "+mensalidade.toString());
-            lblTreino.setText("Treino: "+mensalidade.getIdTreino().toString().substring(0, 27)+".");
-            lblValor.setText("Valor: R$:"+mensalidade.getValor());
-            lblDiasSemana.setText("Dias da semana: "+mensalidade.getIdTreino().getDiasSemana());
+        if ((HaIndexSelecionado) && (!mensalidade.equals(null))) {
+            lblMensalidade.setText("Mensalidade: " + mensalidade.toString());
+            lblTreino.setText("Treino: " + mensalidade.getIdTreino().toString().substring(0, 27) + ".");
+            lblValor.setText("Valor: R$:" + mensalidade.getValor());
+            lblDiasSemana.setText("Dias da semana: " + mensalidade.getIdTreino().getDiasSemana());
         }
 
     }
@@ -69,8 +84,8 @@ public class frmListarMensalidades extends javax.swing.JDialog {
         painelFundo = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListMensalidades = new javax.swing.JList<>();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnConfirmar = new javax.swing.JButton();
+        btnSair = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         lblBtnAdd = new javax.swing.JLabel();
         lblBtnRemover = new javax.swing.JLabel();
@@ -97,9 +112,19 @@ public class frmListarMensalidades extends javax.swing.JDialog {
         jListMensalidades.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane1.setViewportView(jListMensalidades);
 
-        jButton1.setText("Confirmar");
+        btnConfirmar.setText("Confirmar");
+        btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Sair");
+        btnSair.setText("Sair");
+        btnSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSairActionPerformed(evt);
+            }
+        });
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -119,7 +144,7 @@ public class frmListarMensalidades extends javax.swing.JDialog {
 
         lblBtnRemover.setBackground(new java.awt.Color(153, 255, 255));
         lblBtnRemover.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lixeira_60_1.png"))); // NOI18N
+        lblBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lixeira_60.png"))); // NOI18N
         lblBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblBtnRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -191,9 +216,9 @@ public class frmListarMensalidades extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(painelFundoLayout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSair, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(painelFundoLayout.createSequentialGroup()
                         .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -215,8 +240,8 @@ public class frmListarMensalidades extends javax.swing.JDialog {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
                 .addGroup(painelFundoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnConfirmar)
+                    .addComponent(btnSair))
                 .addGap(62, 62, 62))
         );
 
@@ -235,7 +260,7 @@ public class frmListarMensalidades extends javax.swing.JDialog {
         // TODO add your handling code here:
         imgAlu = new ImageIcon("src\\Imagens\\add_60.png");
         lblBtnAdd.setIcon(imgAlu);
-        frmTreinoMensalidade telaTreinoMernsalidade = new frmTreinoMensalidade(true, frameAluno);
+        frmTreinoMensalidade telaTreinoMernsalidade = new frmTreinoMensalidade();
         telaTreinoMernsalidade.setVisible(true);
     }//GEN-LAST:event_lblBtnAddMouseReleased
 
@@ -252,10 +277,27 @@ public class frmListarMensalidades extends javax.swing.JDialog {
         //Metodo de exclusao.
     }//GEN-LAST:event_lblBtnRemoverMouseReleased
 
+    private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
+        // TODO add your handling code here:
+        mensalidade = (Mensalidade) listaMensalidades.getElementAt(jListMensalidades.getSelectedIndex());
+
+        if (origemAluno) {
+
+            frameAluno.setMensalidade(mensalidade);
+            //gerarMensalidadeAluno(frameAluno.aluno, );
+            //frameAluno.atualizarMensalidade();
+        }
+    }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_btnSairActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnSair;
     private javax.swing.JList<String> jListMensalidades;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

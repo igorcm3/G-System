@@ -24,15 +24,14 @@ public class AlunoDAO {
     }
 
     public Boolean persist(Aluno a) {
-        Boolean result = true;
         try {
             em.getTransaction().begin();
             em.persist(a);
             em.getTransaction().commit();
         } catch (Exception e) {
-            return result; // tratamento para erros de gravação no banco
+            return false; // tratamento para erros de gravação no banco
         }
-        return result;
+        return true;
     }
 
     public void merge(Aluno a) {

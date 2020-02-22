@@ -23,9 +23,10 @@ import javax.swing.ImageIcon;
  * @author coron
  */
 public class frmPrincipal extends javax.swing.JFrame {
+
     // Atributos
     private ImageIcon imgAlu;
-    
+
     public frmPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
@@ -74,13 +75,13 @@ public class frmPrincipal extends javax.swing.JFrame {
         lblVersaoSistema = new javax.swing.JLabel();
         lblHora = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
-        btnAluno = new javax.swing.JPanel();
-        lblAluno = new javax.swing.JLabel();
         menuTopo = new javax.swing.JMenuBar();
         menuNovo = new javax.swing.JMenu();
         alunoMenu = new javax.swing.JMenuItem();
         sep1 = new javax.swing.JPopupMenu.Separator();
         personalMenu = new javax.swing.JMenuItem();
+        TreinoMenu = new javax.swing.JMenuItem();
+        MensalidadesMenu = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -132,59 +133,18 @@ public class frmPrincipal extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        btnAluno.setBackground(new java.awt.Color(246, 246, 250));
-        btnAluno.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        btnAluno.setForeground(new java.awt.Color(255, 255, 255));
-        btnAluno.setCursor(new java.awt.Cursor(java.awt.Cursor.N_RESIZE_CURSOR));
-        btnAluno.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnAlunoMouseClicked(evt);
-            }
-        });
-
-        lblAluno.setBackground(new java.awt.Color(0, 0, 0));
-        lblAluno.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblAluno.setText("Alunos");
-
-        javax.swing.GroupLayout btnAlunoLayout = new javax.swing.GroupLayout(btnAluno);
-        btnAluno.setLayout(btnAlunoLayout);
-        btnAlunoLayout.setHorizontalGroup(
-            btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 145, Short.MAX_VALUE)
-            .addGroup(btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(btnAlunoLayout.createSequentialGroup()
-                    .addGap(0, 36, Short.MAX_VALUE)
-                    .addComponent(lblAluno)
-                    .addGap(0, 35, Short.MAX_VALUE)))
-        );
-        btnAlunoLayout.setVerticalGroup(
-            btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 29, Short.MAX_VALUE)
-            .addGroup(btnAlunoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(btnAlunoLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(lblAluno)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-
         javax.swing.GroupLayout pnFrmPrincipalLayout = new javax.swing.GroupLayout(pnFrmPrincipal);
         pnFrmPrincipal.setLayout(pnFrmPrincipalLayout);
         pnFrmPrincipalLayout.setHorizontalGroup(
             pnFrmPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFrmPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(pnFrmPrincipalLayout.createSequentialGroup()
-                .addComponent(txtPainelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(txtPainelInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         pnFrmPrincipalLayout.setVerticalGroup(
             pnFrmPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnFrmPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 405, Short.MAX_VALUE)
+                .addContainerGap(447, Short.MAX_VALUE)
                 .addComponent(txtPainelInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -192,7 +152,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuTopo.setForeground(new java.awt.Color(255, 255, 255));
 
         menuNovo.setBackground(new java.awt.Color(0, 122, 217));
-        menuNovo.setText("Novo");
+        menuNovo.setText("Cadastros");
 
         alunoMenu.setText("Aluno");
         alunoMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -204,7 +164,28 @@ public class frmPrincipal extends javax.swing.JFrame {
         menuNovo.add(sep1);
 
         personalMenu.setText("Personal");
+        personalMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                personalMenuActionPerformed(evt);
+            }
+        });
         menuNovo.add(personalMenu);
+
+        TreinoMenu.setText("Treino");
+        TreinoMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TreinoMenuActionPerformed(evt);
+            }
+        });
+        menuNovo.add(TreinoMenu);
+
+        MensalidadesMenu.setText("Mensalidades");
+        MensalidadesMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MensalidadesMenuActionPerformed(evt);
+            }
+        });
+        menuNovo.add(MensalidadesMenu);
 
         menuTopo.add(menuNovo);
 
@@ -218,7 +199,7 @@ public class frmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnFrmPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(pnFrmPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 880, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,23 +217,35 @@ public class frmPrincipal extends javax.swing.JFrame {
             }
         });
     }
-        
+
     private void alunoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alunoMenuActionPerformed
         // TODO add your handling code here:
         frmListarAlunos listarAlunos = new frmListarAlunos(true);
         listarAlunos.setVisible(true);
     }//GEN-LAST:event_alunoMenuActionPerformed
 
-    private void btnAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAlunoMouseClicked
+    private void TreinoMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TreinoMenuActionPerformed
         // TODO add your handling code here:
-        frmListarAlunos listarAlunos = new frmListarAlunos(true);
-        listarAlunos.setVisible(true);        
-    }//GEN-LAST:event_btnAlunoMouseClicked
+        frmTreino telaTreino = new frmTreino(true);
+        telaTreino.setVisible(true);
+    }//GEN-LAST:event_TreinoMenuActionPerformed
+
+    private void personalMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_personalMenuActionPerformed
+        // TODO add your handling code here:
+        frmCadastrarPersonal telaPersonal = new frmCadastrarPersonal(true);
+        telaPersonal.setVisible(true);
+    }//GEN-LAST:event_personalMenuActionPerformed
+
+    private void MensalidadesMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MensalidadesMenuActionPerformed
+        // TODO add your handling code here:
+        frmListarMensalidades telaMensalidades = new frmListarMensalidades();
+        telaMensalidades.setVisible(true);
+    }//GEN-LAST:event_MensalidadesMenuActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem MensalidadesMenu;
+    private javax.swing.JMenuItem TreinoMenu;
     private javax.swing.JMenuItem alunoMenu;
-    private javax.swing.JPanel btnAluno;
-    private javax.swing.JLabel lblAluno;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEmpresa;
     private javax.swing.JLabel lblHora;

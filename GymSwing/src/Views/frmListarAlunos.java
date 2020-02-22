@@ -3,6 +3,7 @@ package Views;
 import DAO.AlunoDAO;
 import Models.Aluno;
 import Models.Receber;
+import Uteis.Funcoes;
 import java.awt.Color;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -31,12 +32,12 @@ public class frmListarAlunos extends javax.swing.JDialog {
                 dtm.insertRow(dtm.getRowCount(), new Object[]{retornaAlunoNome(aluno.getNome()),
                     retornaTreino(aluno),
                     retornaPersonal(aluno),
-                    retornaMensalidade(aluno.getIdMensalidade().getValor()),
+                    retornaMensalidade(aluno),                    
                     retornaAlunoPago(alunoDao.getUltimoReceberAluno(aluno.getIdAluno()))
                 }); // refatorar! utilizaR METODO NA CLASSE Funcoes que retorna o array de object, ja formatado, levar todas as funcoes de "retorna" para la 
             }
         } catch (Exception e) {
-            //Funcoes.MsgSimples(e.toString(), "Erro");
+           Funcoes.MsgWarningSimples(e.getMessage(), "Erro");
         }
     }
 
@@ -62,6 +63,9 @@ public class frmListarAlunos extends javax.swing.JDialog {
     }
 
     public String retornaTreino(Aluno a) {
+        if (a.getIdMensalidade() == null) {
+            return "Sem treino cadastrado";
+        }
         if (a.getIdMensalidade().getIdTreino() == null) {
             return "Sem treino cadastrado";
         } else {
@@ -77,11 +81,12 @@ public class frmListarAlunos extends javax.swing.JDialog {
         }
     }
 
-    public Float retornaMensalidade(Float p) {
-        if (!p.equals(null)) {
-            return p;
+    public double retornaMensalidade(Aluno a) {
+        if (a.getIdMensalidade() == null) {
+            return Float.parseFloat("0.000");
+            
         } else {
-            return Float.parseFloat("0.0");
+            return a.getIdMensalidade().getValor();
         }
     }
 
@@ -134,7 +139,7 @@ public class frmListarAlunos extends javax.swing.JDialog {
 
         lblBtnRemover.setBackground(new java.awt.Color(153, 255, 255));
         lblBtnRemover.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lixeira_60_1.png"))); // NOI18N
+        lblBtnRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/lixeira_60.png"))); // NOI18N
         lblBtnRemover.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         lblBtnRemover.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {

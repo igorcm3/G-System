@@ -101,11 +101,18 @@ create table Receber (
 insert into empresa values(1,'Academia Body Master', 'Vagner Vanchett', '0000000') ;
 insert into Aluno values (0, 'Gabriela Rhoden', '9999999', 'F', '05805805805', 1, null , 1);
 
+insert into Aluno values (0, 'Gabriela Rhoden', '9999999', 'F', '05805805805', null, null , null);
+
 
 
 
 select * from aluno;
 select * from mensalidade;
+
+select * from treino;
+
+
+select * from receber;
 
 
     
